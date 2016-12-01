@@ -1,0 +1,9 @@
+@font-face { 
+font-family: 'lebBarFont'; 
+src: url('../fonts/AGALEGA-Regular.otf'); 
+} 
+ 
+.lebBar{
+	font-family: 'lebBarFont',Arial,sans-serif;  
+}
+

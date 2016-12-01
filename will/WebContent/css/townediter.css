@@ -1,0 +1,29 @@
+body {
+	margin: 0px;
+}
+
+canvas {
+	display: block;
+}
+
+.theworld {
+	width: 100%;
+	height: 100%;
+}
+
+.clear {
+	clear: both;
+}
+
+.selected {
+	border: 3px yellow solid;
+	float: left;
+}
+
+.building:HOVER {
+	border: 3px red solid;
+}
+
+.buildingBox {
+	background: black;
+}

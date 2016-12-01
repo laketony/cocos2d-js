@@ -1,0 +1,11 @@
+{
+    "debugMode"     : 1,
+    "frameRate"     : 60,
+    "id"            : "gameCanvas",
+    "renderMode"    : 1,
+    "showFPS"       : true,
+    "jsList"        : [ 
+    					"cocos-src/resource1.js",
+    					"cocos-src/GameScene.js"
+    					]
+}

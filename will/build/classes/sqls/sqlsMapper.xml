@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlsMapper">
+
+	<select id="npcChar" parameterType="int" resultType="cn.laketony.dto.NpcTalks">
+		SELECT * FROM `chart_message`
+		LIMIT 0, 1000;
+	</select>
+
+
+
+	<!-- Signpost -->
+	<insert id="addRoadsigns" parameterType="cn.laketony.dto.Signpost">
+		INSERT INTO `roadsigns` (`x`, `y`, `text`,
+		`fontsize`) VALUES (#{x},#{y},#{text},#{fontsize});
+
+	</insert>
+	<select id="getRoadsignsList" resultType="cn.laketony.dto.Signpost">
+		SELECT * FROM `roadsigns` ;
+	</select>
+</mapper>

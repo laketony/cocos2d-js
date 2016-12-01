@@ -1,0 +1,33 @@
+@font-face { 
+font-family: 'lebBarFont'; 
+src: url('../fonts/AGALEGA-Regular.otf'); 
+} 
+
+.lebBar{
+	font-family: 'lebBarFont',Arial,sans-serif;  
+}
+
+.HengUL
+{
+	width:100%;
+	list-style:none;
+	overflow:hidden; 
+}
+.HengUL li
+{
+	float: left;
+	width:14%;
+	text-align: center;
+	height: 77px;
+	border: 1px red solid;
+	margin: 1px;
+}
+.HengUL li:HOVER
+{
+	background: #FF00FF;
+}
+.clearFloat
+{
+	clear: both;
+	width: 0px;
+}

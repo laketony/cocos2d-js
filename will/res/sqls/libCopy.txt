@@ -1,0 +1,35 @@
+<!--  -->
+	<select id="getAllContentWithStart" parameterType="Map" resultType="cc.laketony.test.dto.CoreContent">
+		select * from `core_content` 
+		<![CDATA[ WHERE `autoid` <= #{maxAutoid}  ]]>
+		ORDER BY autoid DESC
+		limit #{page_index},15;
+	</select>
+
+	<insert id="addContent" parameterType="cc.laketony.test.dto.CoreContent">
+
+		insert into `core_content` ( `userid`, `imageurl`, `title`, `user_name`, `url`,`content`)
+		values (
+		#{userid},#{imageurl},#{title},#{username},#{url},#{content});
+	</insert>
+
+	<!-- 删除用户(Remove) -->
+	<delete id="deleteUser" parameterType="int">
+		delete from users where
+		id=#{id};
+	</delete>
+
+	<delete id="delete_core_content" parameterType="int">
+
+		DELETE FROM `core_content` WHERE (`autoid`=#{id});
+	</delete>
+	<!-- 修改用户(Update) -->
+	<update id="updateUser" parameterType="cc.laketony.test.dto.CoreContent">
+		update users set
+		name=#{name},age=#{age} where id=#{id};
+	</update>
+
+	<!-- 阅读量增加 -->
+	<update id="addOpenNumber" parameterType="int">
+		UPDATE `core_content` SET `opennumber`=`opennumber`+1 WHERE (`autoid`=#{id});
+	</update>

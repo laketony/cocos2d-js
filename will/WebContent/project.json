@@ -1,0 +1,29 @@
+{
+	"debugMode": 1,
+	"frameRate": 60,
+	"id": "gameCanvas",
+	"renderMode": 1,
+	"showFPS": false,
+	"jsList": [
+		"cocos-src/Utils/LTMath.js",
+		"cocos-src/resource1.js",
+		"cocos-src/CoreLayer/WorldMapLayer.js",
+		"cocos-src/CoreLayer/WindowLayer.js",
+		"cocos-src/CoreLayer/PlayerLayer.js",
+		"cocos-src/CoreLayer/MonsterLayer.js",
+		"cocos-src/CoreLayer/TilesMapLayer.js",
+		"cocos-src/GameScene.js",
+		"cocos-src/Items/Paodan.js",
+		"cocos-src/Items/Player.js",
+		"cocos-src/Items/Monster.js",
+		"cocos-src/Items/Fortress.js",
+		"cocos-src/Items/MineObject.js",
+		"cocos-src/Items/NpcObject.js",
+		"cocos-src/Items/TilesItem.js",
+		"cocos-src/ItemsUI/EffectAnim.js",
+		"cocos-src/ItemsUI/LDialog.js",
+		"cocos-src/ItemsUI/EffectAnim.js",
+		"cocos-src/Items/Signpost.js",
+		"cocos-src/Items/Transfer.js"
+	]
+}

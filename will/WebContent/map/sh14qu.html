@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+body, html, #allmap {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0;
+	font-family: "微软雅黑";
+}
+</style>
+<script type="text/javascript"
+	src="http://api.map.baidu.com/api?v=2.0&ak=bEth95PU1awp8G6oIVFlsvkS"></script>
+<title>添加行政区划</title>
+</head>
+<body>
+	<div id="ccc">ajsdlkjalskjd</div>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
+	map.enableScrollWheelZoom();
+
+	function getBoundary() {
+		var bdary = new BMap.Boundary();
+
+		var nameset = [ "上海市嘉定区", "上海市卢湾区", "上海市黄埔区", "上海市虹口区", "上海市闸北区",
+				"上海市宝山区" ];
+		for ( var key in nameset) {
+
+			namebll = nameset[key];
+
+			bdary.get(namebll, function(rs) { //获取行政区域
+				//map.clearOverlays();        //清除地图覆盖物       
+				var count = rs.boundaries.length; //行政区域的点有多少个
+
+				if (count === 0) {
+					//alert('未能获取当前输入行政区域'+namebll); 
+					return;
+				}
+				var pointArray = [];
+				var m_strokeColor = "#ff0000";
+				if (Math.random() * 10 > 7) {
+					m_strokeColor = "#0000ff";
+				}
+
+				for (var i = 0; i < count; i++) {
+					var ply = new BMap.Polygon(rs.boundaries[i], {
+						strokeWeight : 2,
+						strokeColor : m_strokeColor
+					}); //建立多边形覆盖物
+					map.addOverlay(ply); //添加覆盖物
+					pointArray = pointArray.concat(ply.getPath());
+					for ( var point_inex in ply.ro)
+						addlabel1(ply.ro[point_inex]);
+				}
+				map.setViewport(pointArray); //调整视野  
+				addlabel();
+			});
+		}
+	}
+	function drawXingzhengqu(bdary, namebll) {
+
+	}
+	setTimeout(function() {
+		getBoundary();
+	}, 2000);
+	function addlabel() {
+		var pointArray = [ new BMap.Point(121.716076, 23.703799),
+				new BMap.Point(112.121885, 14.570616),
+				new BMap.Point(123.776573, 25.695422) ];
+		var optsArray = [ {}, {}, {} ];
+		var labelArray = [];
+		var contentArray = [ "台湾是中国的！", "南海是中国的！", "钓鱼岛是中国的！" ];
+		for (var i = 0; i < pointArray.length; i++) {
+			optsArray[i].position = pointArray[i];
+			labelArray[i] = new BMap.Label(contentArray[i], optsArray[i]);
+			labelArray[i].setStyle({
+				color : "red",
+				fontSize : "12px",
+				height : "20px",
+				lineHeight : "20px",
+				fontFamily : "微软雅黑"
+			});
+			map.addOverlay(labelArray[i]);
+		}
+	}
+	function addlabel1(pox) {
+		console.log(pox);
+		var pointArray = [ pox ];
+		var optsArray = [ {}, {}, {} ];
+		var labelArray = [];
+		var contentArray = [ Math.random() % 1000 + Math.random() % 10000
+				+ Math.random() % 1000000 + Math.random() % 100 ];
+		for (var i = 0; i < pointArray.length; i++) {
+			optsArray[i].position = pointArray[i];
+			labelArray[i] = new BMap.Label(contentArray[i], optsArray[i]);
+			labelArray[i].setStyle({
+				color : "red",
+				fontSize : "12px",
+				height : "20px",
+				lineHeight : "20px",
+				fontFamily : "微软雅黑"
+			});
+			map.addOverlay(labelArray[i]);
+		}
+	}
+</script>
