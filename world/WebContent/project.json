@@ -1,0 +1,18 @@
+{
+	"debugMode": 1,
+	"frameRate": 60,
+	"id": "gameCanvas",
+	"renderMode": 1,
+	"showFPS": false,
+	"jsList": [
+		"src/resource.js",
+		"src/core-index.js",
+		"src/GameScene.js",
+		
+		"src/layer/PlayerLayer.js",
+		"src/layer/WindowLayer.js",
+		
+		"src/items/actor.js",
+		"src/Utils/EffectAnim.js"
+	]
+}

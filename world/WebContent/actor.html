@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+img {
+	width: 280px;
+}
+</style>
+</head>
+<body>
+	<a href="actor2.html">演员表详情</a>
+	<div class="showpanl"></div>
+
+	<script type="text/javascript" src="api/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		for (var index = 1; index <= 120; index++) {
+			var htmlImg = htmlMake(index);
+			$(".showpanl").append(htmlImg);
+		}
+
+		function htmlMake() {
+			var index = arguments[0];
+			var htmlImg = '<img src="res/actor/bookChara'+ index+'_1.png" alt="" />';
+			return htmlImg;
+		}
+	</script>
+
+
+</body>
+</html>
+<!-- 	<img src="res/actor/bookChara1_1.png" alt="" />
+ -->

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+.actor {
+	width: 280px;
+}
+
+.bq {
+	position: absolute;
+}
+
+.actorinfo {
+	position: relative;
+}
+</style>
+<body>
+
+	<div class="showpanl"></div>
+
+	<script type="text/javascript" src="api/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		for (var index = 1; index <= 120; index++) {
+			var htmlImg = htmlMake(index);
+			$(".showpanl").append(htmlImg);
+		}
+
+		function htmlMake() {
+			var index = arguments[0];
+			var htmlImg = '<div class="actorinfo">';
+
+			htmlImg += '<img src="res/actor/bookChara'+ index+'_1.png" alt="" class="actor" />';
+			htmlImg += '<img src="res/actor/bookChara'+ index+'_2.png" alt="" class="actor bq "/>';
+			htmlImg += '<img src="res/actor/bookChara'+ index+'_1.png" alt="" class="actor" />';
+			htmlImg += '<img src="res/actor/bookChara'+ index+'_3.png" alt="" class="actor bq"/>';
+			htmlImg += '<img src="res/actor/bookChara'+ index+'_1.png" alt="" class="actor"/><br/>';
+			htmlImg += '<img src="res/UI/charaName'+index+'.png" alt="" />';
+			htmlImg += '</div>';
+			return htmlImg;
+		}
+	</script>
+
+
+</body>
+</html>
+<!-- 	<img src="res/actor/bookChara1_1.png" alt="" />
+ -->
