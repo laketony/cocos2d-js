@@ -1,0 +1,17 @@
+{
+	"debugMode": 1,
+	"frameRate": 60,
+	"id": "gameCanvas",
+	"renderMode": 1,
+	"showFPS": false,
+	"jsList": [
+		"src/resource.js",
+		"src/Utils/LTMath.js",
+		"src/layer/WindowLayer.js",
+		"src/layer/WorldMapLayer.js",
+		"src/layer/PlayerLayer.js",
+		"src/core-index.js",
+		"src/GameScene.js",
+		"src/fxp.js"
+	]
+}
