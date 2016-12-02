@@ -71,6 +71,42 @@ var WindowLayer = cc.Layer.extend({
 		myRoomChara.setPosition(winSize.width+400,-400);
 		this.addChild(myRoomChara);
 		cc.eventManager.addListener(this.listener_PlayerLayer, this);
+		
+		var step1 = EffectAnim.A4Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1]);
+		
+		var kkGlode = new cc.Sprite();
+		console.log(kkGlode);
+		kkGlode.setRotation(90);
+		kkGlode.setScale(2.5);
+		kkGlode.width = winSize.width;
+		kkGlode.height = winSize.height;
+		// kkGlode.setPosition(centerPos);
+		// this.addChild(kkGlode);
+		kkGlode.runAction(seq.repeatForever());
+		kkGlode.setLocalZOrder(2);
+		kkGlode.setZOrder(2);
+		kkGlode.setGlobalZOrder(2);
+		
+		var shape = new cc.DrawNode();
+	    shape.drawRect(cc.p(-winSize.width/2, -winSize.height / 2), cc.p(winSize.width/2, winSize.height / 2), 
+	    cc.color(255, 25, 255, 255), 2, cc.color(0, 0, 0, 0));
+	    shape.setLocalZOrder(20);
+	    
+		
+		var clippingNode = cc.ClippingNode.create();
+		var content = cc.Sprite.create("res/actor/myRoomChara1_1.png" );
+		clippingNode.addChild(shape,101); // 设置底板
+		clippingNode.setInverted( false );
+		clippingNode.setAlphaThreshold(0.05);
+		clippingNode.setStencil(kkGlode); 
+		clippingNode.setPosition(centerPos);
+		
+
+		this.addChild(clippingNode);
+		
+	     
 	},
 	initLabelAtlas : function(strText, charMapFile) {
 		var label1 =  new cc.LabelAtlas(strText,

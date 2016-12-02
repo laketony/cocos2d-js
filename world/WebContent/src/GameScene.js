@@ -255,7 +255,7 @@ var PCardScene = cc.Scene.extend({
 	listenerWorldMapKeyLayer :cc.EventListener.create({
         event: cc.EventListener.KEYBOARD,
         onKeyPressed:function(key, event) {
-	
+        	   cc.log("Key onKeyPressed:" + key+" "+String.fromCharCode(key));
         	switch (key) {
 			case 27:// J
 				cc.director.popScene();
