@@ -1,3 +1,4 @@
+var cardNN = ["临","兵","斗","者","皆","阵","列","前","行"];
 var BattleScene = cc.Scene.extend({
 	ctor: function() {
 		this._super();
@@ -41,38 +42,52 @@ var BattleScene = cc.Scene.extend({
 		
 
 	
-		var combatMove = cc.moveBy(4, cc.p(combatOverX, 0)); 
+		var combatMove = cc.moveBy(0.4, cc.p(combatOverX, 0)); 
 		var attarCallFunc = cc.callFunc(this.acaii, this);
 	    var action1 = cc.sequence(cc.place(cc.p(0,0)), combatMove,attarCallFunc).repeatForever() ;
 		combatSpp.runAction(action1);
 		// ----------战斗条------
 		
-		var sk_card1  = new SKCard("res/UI1/FX_Frame_Hostile_Frame@100.png","斗");
+		var sk_card1  = new SKCard("res/UI1/FX_Frame_Hostile_Frame@100.png","临");
 		sk_card1.setPosition(55+100*0,50); 
 		combatLayer.addChild(sk_card1);
 		
-		var sk_card2  = new cc.Sprite("res/UI1/FX_Frame_Hostile_Frame@100.png");
+		var sk_card2  = new SKCard("res/UI1/FX_Frame_Hostile_Frame@100.png","兵");
 		sk_card2.setPosition(55+100*1,50);
 		combatLayer.addChild(sk_card2);
 		
-		var sk_card3  = new cc.Sprite("res/UI1/FX_Frame_Hostile_Frame@100.png");
+		var sk_card3  = new SKCard("res/UI1/FX_Frame_Hostile_Frame@100.png","斗");
 		sk_card3.setPosition(55+100*2,50);
 		combatLayer.addChild(sk_card3);
 		
-		var sk_card4  = new cc.Sprite("res/UI1/FX_Frame_HostileSelect_Frame@100.png");
+		var sk_card4  = new SKCard("res/UI1/FX_Frame_Hostile_Frame@100.png","者");
 		sk_card4.setPosition(55+100*3,50);
 		combatLayer.addChild(sk_card4);
 		
-		var sk_card5  = new cc.Sprite("res/UI1/FX_Frame_Hostile_Frame@100.png");
+		var sk_card5  = new SKCard("res/UI1/FX_Frame_Hostile_Frame@100.png","列");
 		sk_card5.setPosition(55+100*4,50);
 		combatLayer.addChild(sk_card5);
 		
+		
+		combatSpp.sk_card1 = sk_card1;
+		combatSpp.sk_card2 = sk_card2;
+		combatSpp.sk_card3 = sk_card3;
+		combatSpp.sk_card4 = sk_card4;
+		combatSpp.sk_card5 = sk_card5;
+	
 		
 		cc.eventManager.addListener(this.listenerScene, this);
 
 	},
 	acaii : function(tager) {
-		console.log(tager);
+		
+		tager.sk_card1.setString(cardNN[tager.sk_card1.textIndex]);
+		tager.sk_card1.textIndex++;
+		 
+		if(tager.sk_card1.textIndex >= cardNN.length){
+			tager.sk_card1.textIndex = 0;
+		}
+		 
 	},
 	listenerScene :cc.EventListener.create({
 		event : cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -127,6 +142,7 @@ var BattleScene = cc.Scene.extend({
 
 var SKCard = cc.Sprite.extend({
 	text:"",
+	textIndex:1,
 	label:null,
 	ctor : function(name,text) {
 		this._super(name);
