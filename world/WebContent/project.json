@@ -8,11 +8,11 @@
 		"src/resource.js",
 		"src/core-index.js",
 		"src/GameScene.js",
-		
 		"src/layer/PlayerLayer.js",
 		"src/layer/WindowLayer.js",
-		
 		"src/items/actor.js",
-		"src/Utils/EffectAnim.js"
+		"src/Utils/EffectAnim.js",
+		"src/BattleScene.js",
+		"src/layer/Battle_Layers.js"
 	]
 }

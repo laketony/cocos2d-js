@@ -1,4 +1,5 @@
 var WindowLayer = cc.Layer.extend({
+
 	ctor : function() {
 		this._super();
 		this.init();
@@ -89,22 +90,21 @@ var WindowLayer = cc.Layer.extend({
 		kkGlode.setZOrder(2);
 		kkGlode.setGlobalZOrder(2);
 		
-		var shape = new cc.DrawNode();
-	    shape.drawRect(cc.p(-winSize.width/2, -winSize.height / 2), cc.p(winSize.width/2, winSize.height / 2), 
-	    cc.color(255, 25, 255, 255), 2, cc.color(0, 0, 0, 0));
-	    shape.setLocalZOrder(20);
-	    
-		
-		var clippingNode = cc.ClippingNode.create();
-		var content = cc.Sprite.create("res/actor/myRoomChara1_1.png" );
-		clippingNode.addChild(shape,101); // 设置底板
-		clippingNode.setInverted( false );
-		clippingNode.setAlphaThreshold(0.05);
-		clippingNode.setStencil(kkGlode); 
-		clippingNode.setPosition(centerPos);
-		
-
-		this.addChild(clippingNode);
+// var shape = new cc.DrawNode();
+// shape.drawRect(cc.p(-winSize.width/2, -winSize.height / 2),
+// cc.p(winSize.width/2, winSize.height / 2),
+// cc.color(255, 25, 255, 255), 2, cc.color(0, 0, 0, 0));
+// shape.setLocalZOrder(20);
+//	   		
+// var clippingNode = cc.ClippingNode.create();
+// var content = cc.Sprite.create("res/actor/myRoomChara1_1.png" );
+// clippingNode.addChild(shape,101); // 设置底板
+// clippingNode.setInverted( false );
+// clippingNode.setAlphaThreshold(0.05);
+// clippingNode.setStencil(kkGlode);
+// clippingNode.setPosition(centerPos);
+//
+// this.addChild(clippingNode);
 		
 	     
 	},

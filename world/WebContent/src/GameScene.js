@@ -1,22 +1,22 @@
 var GameScene = cc.Scene.extend({
-
+	ctor: function() {
+		this._super();
+		console.log("GameScene ctor");
+		this.createScene();
+	},
 	onEnter : function() {
 		this._super();
-		this.createScene();
-
+		console.log("GameScene onEnter");
+		
 		if( 'keyboard' in cc.sys.capabilities ) {
-	          cc.eventManager.addListener(this.listenerWorldMapKeyLayer, this);
+	          cc.eventManager.addListener( ListenerKEYBOARD, this);
 	    }
-		this.listenerWorldMapKeyLayer.delegate = this;
+		ListenerKEYBOARD.delegate = this;
 	},
 	createScene : function() {
 		var winSize = cc.director.getWinSize();
 		var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
-		
-		
-		
-		
-		
+		console.log("GameScene createScene");
 		
 		var playerLayer = new PlayerLayer();
 		playerLayer.setAnchorPoint(0,0);
@@ -32,94 +32,12 @@ var GameScene = cc.Scene.extend({
 		var windowLayer = new WindowLayer();
 		this.addChild(windowLayer);
 		
-		cc.eventManager.addListener(listenerWorldMapLayer, this);
+		cc.eventManager.addListener(ListenerWorldMapLayer, this);
 
-	}, 
-	// 创建一个事件监听器 OneByOne 为单点触摸
-	listenerWorldMapKeyLayer :cc.EventListener.create({
-        event: cc.EventListener.KEYBOARD,
-        onKeyPressed:function(key, event) {
-	
-        	switch (key) {
-			case 80:// J
-				cc.director.pushScene(new PCardScene());
-				break;
-			}
-        },
-        onKeyReleased:function(key, event) {
-        	var gameScene = this.delegate;
-        	
-        	switch (key) {
-			case 80:// J
-				cc.director.pushScene(new PCardScene());
-				break;
-			}
-        	var actor = gameScene.cwActor;
-        	console.log("key Released"+key+" "+String.fromCharCode(key) ); 
-        	switch (key) {
-        	case 'Q'.charCodeAt():
-        		var kkGlode = new cc.Sprite();
-    		var step1 = EffectAnim.A3Geter();
-    		var stepRm = cc.removeSelf(false);
-    		var seq = cc.sequence([step1,stepRm]);
-    		actor.addChild(kkGlode);
-    		kkGlode.runAction(seq);
-				break;
-        	case 'W'.charCodeAt():
-        		var kkGlode = new cc.Sprite();
-    		var step1 = EffectAnim.A4Geter();
-    		var stepRm = cc.removeSelf(false);
-    		var seq = cc.sequence([step1,stepRm]);
-    		actor.addChild(kkGlode);
-    		kkGlode.runAction(seq);
-				break;
-        	case 'E'.charCodeAt():
-        		var kkGlode = new cc.Sprite();
-    		var step1 = EffectAnim.A5Geter();
-    		var stepRm = cc.removeSelf(false);
-    		var seq = cc.sequence([step1,stepRm]);
-    		actor.addChild(kkGlode);
-    		kkGlode.runAction(seq);
-				break;
-        	case 'R'.charCodeAt():
-        		var kkGlode = new cc.Sprite();
-    		var step1 = EffectAnim.A6Geter();
-    		var stepRm = cc.removeSelf(false);
-    		var seq = cc.sequence([step1,stepRm]);
-    		actor.addChild(kkGlode);
-    		kkGlode.runAction(seq);
-				break;
-        	case 'A'.charCodeAt():
-        		var kkGlode = new cc.Sprite();
-    		var step1 = EffectAnim.A7Geter();
-    		var stepRm = cc.removeSelf(false);
-    		var seq = cc.sequence([step1,stepRm]);
-    		actor.addChild(kkGlode);
-    		kkGlode.runAction(seq);
-				break;
-        	case 'S'.charCodeAt():
-        		var kkGlode = new cc.Sprite();
-    		var step1 = EffectAnim.A4Geter();
-    		var stepRm = cc.removeSelf(false);
-    		var seq = cc.sequence([step1,stepRm]);
-    		kkGlode.setRotation(90);
-    		actor.addChild(kkGlode);
-    		kkGlode.runAction(seq);
-				break;
-        	case 'D'.charCodeAt():
-				 
-				break;
-        	case 'F'.charCodeAt():
-				 
-				break;
-			}
-        	
-        	
-        }
-    })
+	}
 });
 // 创建一个事件监听器 OneByOne 为单点触摸
-var listenerWorldMapLayer = cc.EventListener.create({
+var ListenerWorldMapLayer = cc.EventListener.create({
 	event : cc.EventListener.TOUCH_ONE_BY_ONE,
 	swallowTouches : false, // 设置是否吞没事件，在 onTouchBegan 方法返回 true 时吞掉事件，不再向下传递。
 	onTouchBegan : function(touch, event) { // 实现 onTouchBegan 事件处理回调函数A
@@ -135,6 +53,16 @@ var listenerWorldMapLayer = cc.EventListener.create({
 		console.log(target.width + " " + target.height);
 
 		
+		
+		// 获取当前触摸点相对于按钮所在的坐标
+		var rect = cc.rect(500, 0, 150, 150);
+		if(cc.rectContainsPoint(rect, locationInNode)){
+			var scene = new BattleScene();
+			var trans = new cc.TransitionProgressInOut(1,scene);
+			cc.director.pushScene(scene);
+			return false;
+		}
+		
 		var kkGlode = new cc.Sprite();
 		kkGlode.setPosition(locationInNode);
 		var step1 = EffectAnim.A7Geter();
@@ -143,8 +71,7 @@ var listenerWorldMapLayer = cc.EventListener.create({
 		target.addChild(kkGlode);
 		kkGlode.runAction(seq);
 		
-		
-		return true;
+		return false;
 	},
 	onTouchMoved : function(touch, event) {
 		// 实现onTouchMoved事件处理回调函数, 触摸移动时触发
@@ -167,6 +94,87 @@ var listenerWorldMapLayer = cc.EventListener.create({
 	}
 });
 
+
+// 创建一个事件监听器 OneByOne 为单点触摸
+var ListenerKEYBOARD = cc.EventListener.create({
+    event: cc.EventListener.KEYBOARD,
+    onKeyPressed:function(key, event) {
+
+    	switch (key) {
+    	case 'P'.charCodeAt():// J
+			cc.director.pushScene(new PCardScene());
+			break;
+    	case 'L'.charCodeAt():// J
+			cc.director.pushScene(new BattleScene());
+			break;
+		}
+    },
+    onKeyReleased:function(key, event) {
+    	var gameScene = this.delegate;
+    	
+    	var actor = gameScene.cwActor;
+    	console.log("key Released"+key+" "+String.fromCharCode(key) ); 
+    	switch (key) {
+    	case 'Q'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A3Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'W'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A4Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'E'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A5Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'R'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A6Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'A'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A7Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'S'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A4Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		kkGlode.setRotation(90);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'D'.charCodeAt():
+			 
+			break;
+    	case 'F'.charCodeAt():
+    		BattleScene
+			break;
+		}
+    	
+    	
+    }
+});
 
 var PCardScene = cc.Scene.extend({
 	player:null,
@@ -240,9 +248,6 @@ var PCardScene = cc.Scene.extend({
 			var locationInNode = target.convertToNodeSpace(touch.getLocation());
 			var s = target.getContentSize();
 			var rect = cc.rect(0, 0, s.width, s.height);
-			console.log(locationInNode);
-			console.log(s);
-			console.log(rect);
 			if(cc.rectContainsPoint(rect, locationInNode)){
 				cc.director.popScene();
 				return true;
@@ -273,9 +278,6 @@ var PCardScene = cc.Scene.extend({
         }
     })
 });
-
-
-
 var SettingScene = cc.Scene.extend({
 	onEnter : function() {
 		this._super();
