@@ -15,3 +15,6 @@ var PlayerLayer = cc.Layer.extend({
 	}
 
 });
+
+
+

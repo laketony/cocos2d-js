@@ -8,8 +8,8 @@ var WindowLayer = cc.Layer.extend({
 
 	taskBox : cc.Node.create(),
 
-	labelTR1 : cc.LabelTTF.create("car_speed", "Transformers_Movie", 25),
-	labelTR2 : cc.LabelTTF.create("car_acceleration", "Transformers_Movie", 25),
+	labelTR1 : cc.LabelTTF.create("HP", "Transformers_Movie", 25),
+	labelTR2 : cc.LabelTTF.create("MP", "Transformers_Movie", 25),
 	labelTR3 : cc.LabelTTF.create("MS", "Transformers_Movie", 25),
 	labelTR4 : cc.LabelTTF.create("AT", "Transformers_Movie", 25),
 
@@ -28,12 +28,12 @@ var WindowLayer = cc.Layer.extend({
 		this.labelBR.setPosition(cc.p(winSize.width - 1, 0));
 		this.addChild(this.labelBR, 1);
 
-		this.labelTR1.setString(0 + " car_speed");
+		this.labelTR1.setString(0 + " HP");
 		this.labelTR1.setAnchorPoint(cc.p(1.0, 1.0));
 		this.labelTR1.setPosition(cc.p(winSize.width - 1, winSize.height - 15));
 		this.addChild(this.labelTR1, 1);
 
-		this.labelTR2.setString(0 + " car_acceleration");
+		this.labelTR2.setString(0 + " MP");
 		this.labelTR2.setAnchorPoint(cc.p(1.0, 1.0));
 		this.labelTR2.setPosition(cc.p(winSize.width - 1, winSize.height - 35));
 		this.addChild(this.labelTR2, 1);
@@ -50,22 +50,19 @@ var WindowLayer = cc.Layer.extend({
 
 		this.labelBL_LV.setString("LV " + 0);
 		this.labelBL_LV.setAnchorPoint(cc.p(0.0, 0.0));
-		this.labelBL_LV.setPosition(cc.p(13, 55));
+		this.labelBL_LV.setPosition(cc.p(13, winSize.height - 75));
 		this.addChild(this.labelBL_LV, 1);
 
 		this.labelBL_EX.setString("Ex " + 0 + "/" + 0);
 		this.labelBL_EX.setAnchorPoint(cc.p(0.0, 0.0));
-		this.labelBL_EX.setPosition(cc.p(13, 25));
+		this.labelBL_EX.setPosition(cc.p(13, winSize.height - 105));
 		this.labelBL_EX.setFontFillColor(cc.color(128,0,255));
 		this.addChild(this.labelBL_EX, 1);
 
 		this.taskBox.setPosition(cc.p(0, winSize.height));
 		this.addChild(this.taskBox, 1);
 		
-// var label1 =
-// this.initLabelAtlas("0123456789",UIs.imageNumberMemberEditType4);
-// label1.setPosition(100,centerPos.y);
-// this.addChild(label1);
+
 		
 		
 		var myRoomChara = this.myRoomChara = new cc.Sprite("res/actor/myRoomChara1_1.png");
@@ -108,12 +105,6 @@ var WindowLayer = cc.Layer.extend({
 		
 	     
 	},
-	initLabelAtlas : function(strText, charMapFile) {
-		var label1 =  new cc.LabelAtlas(strText,
-				charMapFile, 33.333, 33, '0'); 
-		return label1;
-	}
-	,
 	// 创建一个事件监听器 OneByOne 为单点触摸
 	listener_PlayerLayer : cc.EventListener.create({
 		event : cc.EventListener.TOUCH_ONE_BY_ONE,

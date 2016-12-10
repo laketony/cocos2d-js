@@ -3,15 +3,16 @@ var GameScene = cc.Scene.extend({
 		this._super();
 		console.log("GameScene ctor");
 		this.createScene();
+
+		if( 'keyboard' in cc.sys.capabilities ) {
+	          cc.eventManager.addListener( ListenerKEYBOARD, this);
+	    }
+		ListenerKEYBOARD.delegate = this;
 	},
 	onEnter : function() {
 		this._super();
 		console.log("GameScene onEnter");
 		
-		if( 'keyboard' in cc.sys.capabilities ) {
-	          cc.eventManager.addListener( ListenerKEYBOARD, this);
-	    }
-		ListenerKEYBOARD.delegate = this;
 	},
 	createScene : function() {
 		var winSize = cc.director.getWinSize();
@@ -28,6 +29,12 @@ var GameScene = cc.Scene.extend({
 		var kk =this.cwActor= new Actor(actor.bookChara1_1);
 		kk.setPosition(0,0);
 		playerLayer.addChild(kk);
+		
+		
+		var warrr  = new cc.Sprite(UIs.dungeonTitleFrame1);
+		warrr.setPosition(55,65);
+		this.addChild(warrr);
+		
 		
 		var windowLayer = new WindowLayer();
 		this.addChild(windowLayer);
@@ -55,7 +62,7 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		
 		
 		// 获取当前触摸点相对于按钮所在的坐标
-		var rect = cc.rect(500, 0, 150, 150);
+		var rect = cc.rect(0, 0, 150, 150);
 		if(cc.rectContainsPoint(rect, locationInNode)){
 			var scene = new BattleScene();
 			var trans = new cc.TransitionProgressInOut(1,scene);

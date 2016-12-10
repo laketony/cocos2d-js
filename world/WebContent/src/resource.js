@@ -1,11 +1,21 @@
 var ltgv = new Object();
 var g_resources = [];
+
 function Add_g_resources(toAddMap) {
 	for ( var k in toAddMap) {
 		var v = toAddMap[k];
 		g_resources.push(v);
 	}
 }
+var LT = {
+	RunColor : function() {
+		var rcolor = Math.random() * 255;
+		var gcolor = Math.random() * 255;
+		var bcolor = Math.random() * 255;
+		var color = cc.color(rcolor, gcolor, bcolor);
+		return color
+	}
+};
 
 var daolist = {
 	dao1 : "res/wuqi/080_22.png",
@@ -29,7 +39,9 @@ var EffectMap = {
 };
 
 var actor = {
-	bookChara1_1 : "res/actor/bookChara1_1.png"
+	bookChara1_1 : "res/actor/bookChara1_1.png",
+	mChara1 : "res/actor/bookChara87_1.png",
+	mChara2 : "res/actor/bookChara88_1.png"
 }
 
 var UIs = {
@@ -44,11 +56,28 @@ var UIs = {
 	memberFaceChangeIcon1 : "res/UI/memberFaceChangeIcon1.png",
 	returnButton : "res/UI/returnButton.png",
 	header : "res/UI/header.png",
+	
+	dungeonTitleFrame1:"res/UI/dungeonTitleFrame1.png",
 
 	// font
-	imageNumberMemberEditType4 : "res/UI/imageNumberMemberEditType4.png"
+	imageNumberMemberEditType4 : "res/UI/imageNumberMemberEditType4.png",
+	imageNumberEnemyTurnRed : "res/UI/imageNumberEnemyTurnRed.png"
+}
+var UIs2 ={
+		HostileSelect: "res/UI1/FX_Frame_HostileSelect_Frame@100.png",
+		Hostile: "res/UI1/FX_Frame_Hostile_Frame@100.png"
+}
+
+var fonts = {
+	fontZi : {
+		type : "font",
+		name : "fontZi",
+		srcs : [ "res/fonts/zi.ttf" ]
+	}
 }
 
 Add_g_resources(actor);
 Add_g_resources(EffectMap);
 Add_g_resources(UIs);
+Add_g_resources(UIs2);
+Add_g_resources(fonts);
