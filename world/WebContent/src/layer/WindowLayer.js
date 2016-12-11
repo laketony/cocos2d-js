@@ -21,7 +21,6 @@ var WindowLayer = cc.Layer.extend({
 		var winSize = cc.director.getWinSize();
 
 		// create the background image and position it at the center of
-		// screen
 		var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
 
 		this.labelBR.setAnchorPoint(cc.p(1.0, 0.0));
@@ -69,40 +68,14 @@ var WindowLayer = cc.Layer.extend({
 		myRoomChara.setPosition(winSize.width+400,-400);
 		this.addChild(myRoomChara);
 		cc.eventManager.addListener(this.listener_PlayerLayer, this);
+				
 		
-		var step1 = EffectAnim.A4Geter();
-		var stepRm = cc.removeSelf(false);
-		var seq = cc.sequence([step1]);
 		
-		var kkGlode = new cc.Sprite();
-		console.log(kkGlode);
-		kkGlode.setRotation(90);
-		kkGlode.setScale(2.5);
-		kkGlode.width = winSize.width;
-		kkGlode.height = winSize.height;
-		// kkGlode.setPosition(centerPos);
-		// this.addChild(kkGlode);
-		kkGlode.runAction(seq.repeatForever());
-		kkGlode.setLocalZOrder(2);
-		kkGlode.setZOrder(2);
-		kkGlode.setGlobalZOrder(2);
+		var warrr  = new cc.Sprite(UIs.dungeonTitleFrame1);
+		warrr.setPosition(55,65);
 		
-// var shape = new cc.DrawNode();
-// shape.drawRect(cc.p(-winSize.width/2, -winSize.height / 2),
-// cc.p(winSize.width/2, winSize.height / 2),
-// cc.color(255, 25, 255, 255), 2, cc.color(0, 0, 0, 0));
-// shape.setLocalZOrder(20);
-//	   		
-// var clippingNode = cc.ClippingNode.create();
-// var content = cc.Sprite.create("res/actor/myRoomChara1_1.png" );
-// clippingNode.addChild(shape,101); // 设置底板
-// clippingNode.setInverted( false );
-// clippingNode.setAlphaThreshold(0.05);
-// clippingNode.setStencil(kkGlode);
-// clippingNode.setPosition(centerPos);
-//
-// this.addChild(clippingNode);
-		
+		this.addChild(warrr);
+			
 	     
 	},
 	// 创建一个事件监听器 OneByOne 为单点触摸
@@ -114,22 +87,55 @@ var WindowLayer = cc.Layer.extend({
 			var target = event.getCurrentTarget(); // 获取事件所绑定的 target,
 			// 通常是cc.Node及其子类
 
+
 			// 获取当前触摸点相对于按钮所在的坐标
 			var locationInNode = target.convertToNodeSpace(touch.getLocation());
-			var winSize = cc.director.getWinSize();
-			var myRoomChara = target.myRoomChara;
-			myRoomChara.setPosition(winSize.width+myRoomChara.width/4,0-myRoomChara.height/4);
-			var step1 =cc.moveTo(0.3 , winSize.width-myRoomChara.width/2,myRoomChara.height/2);
-			console.log(myRoomChara);
-			myRoomChara.stopAllActions();
-			myRoomChara.runAction(step1);
 			
-			myRoomChara.setScale(0.4);
+			// 获取当前触摸点相对于按钮所在的坐标
+			var rect = cc.rect(0, 0, 150, 150);
+			if(cc.rectContainsPoint(rect, locationInNode)){
+				var scene = new BattleScene();
+				var trans = new cc.TransitionProgressInOut(1,scene);
+				cc.director.pushScene(scene);
+				return false;
+			}
 			
-			var actionTo = cc.scaleTo(0.3, 1);
-			myRoomChara.runAction(actionTo);
+			var kkGlode = new cc.Sprite();
+			kkGlode.setPosition(locationInNode);
+			var step1 = EffectAnim.A7Geter();
+			var stepRm = cc.removeSelf(false);
+			var seq = cc.sequence([step1,stepRm]);
+			target.addChild(kkGlode);
+			kkGlode.runAction(seq);
 			
 			return false;
 		}
-	})
+	}),
+	show: function() {
+		
+		var winSize = cc.director.getWinSize();
+		
+		
+		var myRoomChara = target.myRoomChara;
+		myRoomChara.setPosition(winSize.width+myRoomChara.width/4,0-myRoomChara.height/4);
+		var step1 =cc.moveTo(0.3 , winSize.width-myRoomChara.width/2,myRoomChara.height/2);
+		console.log(myRoomChara);
+		myRoomChara.stopAllActions();
+		myRoomChara.runAction(step1);
+		
+		myRoomChara.setScale(0.4);
+		
+		var actionTo = cc.scaleTo(0.3, 1);
+		myRoomChara.runAction(actionTo);
+	},
+	showOpenBox:function(){
+		 var kaibaoxiang = new cc.Sprite();
+		 kaibaoxiang.setPosition(centerPos);
+		 var step1 = EffectAnim.A3();
+		 var stepRm = cc.removeSelf(false);
+		 var seq = cc.sequence([step1]).repeatForever();
+				
+		 this.addChild(kaibaoxiang);
+		 kaibaoxiang.runAction(seq);
+	}
 });

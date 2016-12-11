@@ -23,21 +23,46 @@ var GameScene = cc.Scene.extend({
 		playerLayer.setAnchorPoint(0,0);
 		playerLayer.setScale(0.4);
 		playerLayer.setPosition(centerPos);
-		
+		this.playerLayer = playerLayer;
 		this.addChild(playerLayer);
 		
-		var kk =this.cwActor= new Actor(actor.bookChara1_1);
-		kk.setPosition(0,0);
-		playerLayer.addChild(kk);
-		
-		
-		var warrr  = new cc.Sprite(UIs.dungeonTitleFrame1);
-		warrr.setPosition(55,65);
-		this.addChild(warrr);
 		
 		
 		var windowLayer = new WindowLayer();
+		this.windowLayer = windowLayer;
 		this.addChild(windowLayer);
+		
+		
+		var wLayer = new cc.Layer(); 
+		wLayer.setPosition(centerPos);
+		this.addChild(wLayer);
+		this.cwActor=wLayer;
+		
+// //--------------------
+// var shape = new cc.DrawNode();
+// shape.drawRect(cc.p(0,0),cc.p(500,500),
+// cc.color(255, 25, 255, 255), 2, cc.color(0, 0, 0, 0));
+// shape.setLocalZOrder(20);
+// //---------------------
+// var kkGlode = new cc.Sprite();
+// var step1 = EffectAnim.A4Geter();
+// var stepRm = cc.removeSelf(false);
+// var seq = cc.sequence([step1]).repeatForever();
+// kkGlode.runAction(seq);
+// //--------------------
+// var clippingNode = cc.ClippingNode.create();
+// clippingNode.addChild(shape,101); // 设置底板
+// clippingNode.setInverted( false );
+// clippingNode.setAlphaThreshold(0.05);
+// clippingNode.setStencil(kkGlode);
+// wLayer.addChild(clippingNode);
+//		 
+// console.log(clippingNode);
+// wLayer.clippingNodex = clippingNode;
+ 
+
+
+		
 		
 		cc.eventManager.addListener(ListenerWorldMapLayer, this);
 
@@ -56,29 +81,11 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		var s = target.getContentSize();
 		var rect = cc.rect(0, 0, s.width, s.height);
 		// console.log(target);
-		console.log(locationInNode);
-		console.log(target.width + " " + target.height);
+		// console.log(locationInNode);
+		// console.log(target.width + " " + target.height);
 
 		
-		
-		// 获取当前触摸点相对于按钮所在的坐标
-		var rect = cc.rect(0, 0, 150, 150);
-		if(cc.rectContainsPoint(rect, locationInNode)){
-			var scene = new BattleScene();
-			var trans = new cc.TransitionProgressInOut(1,scene);
-			cc.director.pushScene(scene);
-			return false;
-		}
-		
-		var kkGlode = new cc.Sprite();
-		kkGlode.setPosition(locationInNode);
-		var step1 = EffectAnim.A7Geter();
-		var stepRm = cc.removeSelf(false);
-		var seq = cc.sequence([step1,stepRm]);
-		target.addChild(kkGlode);
-		kkGlode.runAction(seq);
-		
-		return false;
+		return true;
 	},
 	onTouchMoved : function(touch, event) {
 		// 实现onTouchMoved事件处理回调函数, 触摸移动时触发
@@ -88,7 +95,10 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		var delta = touch.getDelta(); // 获取事件数据: delta
 		// 获取当前触摸点相对于按钮所在的坐标
 		var locationInNode = target.convertToNodeSpace(touch.getLocation());
-
+		
+		var delta = touch.getDelta(); // 获取事件数据: delta
+		target.playerLayer.x += delta.x ;
+		target.playerLayer.y += delta.y ;
 	},
 	onTouchEnded : function(touch, event) {
 		// 实现onTouchEnded事件处理回调函数
@@ -145,7 +155,7 @@ var ListenerKEYBOARD = cc.EventListener.create({
 		var seq = cc.sequence([step1,stepRm]);
 		actor.addChild(kkGlode);
 		kkGlode.runAction(seq);
-			break;
+		break;
     	case 'R'.charCodeAt():
     		var kkGlode = new cc.Sprite();
 		var step1 = EffectAnim.A6Geter();
@@ -153,6 +163,15 @@ var ListenerKEYBOARD = cc.EventListener.create({
 		var seq = cc.sequence([step1,stepRm]);
 		actor.addChild(kkGlode);
 		kkGlode.runAction(seq);
+			break;
+    	case 'T'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A6Geter();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+		
 			break;
     	case 'A'.charCodeAt():
     		var kkGlode = new cc.Sprite();
@@ -172,10 +191,28 @@ var ListenerKEYBOARD = cc.EventListener.create({
 		kkGlode.runAction(seq);
 			break;
     	case 'D'.charCodeAt():
-			 
+    		var kkGlode = new cc.Sprite();
+    		var step1 = EffectAnim.A7Geter();
+    		var stepRm = cc.removeSelf(false);
+    		var seq = cc.sequence([step1,stepRm]);
+    		actor.addChild(kkGlode);
+    		kkGlode.runAction(seq);
 			break;
     	case 'F'.charCodeAt():
-    		BattleScene
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A2();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
+			break;
+    	case 'G'.charCodeAt():
+    		var kkGlode = new cc.Sprite();
+		var step1 = EffectAnim.A3();
+		var stepRm = cc.removeSelf(false);
+		var seq = cc.sequence([step1,stepRm]);
+		actor.addChild(kkGlode);
+		kkGlode.runAction(seq);
 			break;
 		}
     	

@@ -4,25 +4,40 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-img {
-	width: 280px;
+ul {
+	list-style-type: none
+}
+
+.actorBody {
+	width: 230px;
+	position: relative;
+}
+
+.actorName {
+	width: 128px;
 }
 </style>
 </head>
 <body>
 	<a href="actor2.html">演员表详情</a>
-	<div class="showpanl"></div>
+	<div class="showpanl">
+
+		<ul class="ulshow"></ul>
+	</div>
 
 	<script type="text/javascript" src="api/js/jquery.min.js"></script>
 	<script type="text/javascript">
 		for (var index = 1; index <= 120; index++) {
 			var htmlImg = htmlMake(index);
-			$(".showpanl").append(htmlImg);
+			$(".ulshow").append(htmlImg);
 		}
 
 		function htmlMake() {
 			var index = arguments[0];
-			var htmlImg = '<img src="res/actor/bookChara'+ index+'_1.png" alt="" />';
+			var htmlImg = '<li><div class="actor">';
+			htmlImg += '<img class="actorBody" src="res/actor/bookChara'+ index+'_1.png"/><br/>';
+			htmlImg += '<img class="actorName" src="res/UI/charaName'+ index+'.png"/>';
+			htmlImg += '</div></li>';
 			return htmlImg;
 		}
 	</script>

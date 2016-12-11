@@ -7,6 +7,18 @@ function Add_g_resources(toAddMap) {
 		g_resources.push(v);
 	}
 }
+
+function Add_g_resources_inarray(toAddMap) {
+	for ( var k in toAddMap) {
+		var array = toAddMap[k];
+		for ( var j in array) {
+			var v = array[j];
+			g_resources.push(v);
+		}
+
+	}
+}
+
 var LT = {
 	RunColor : function() {
 		var rcolor = Math.random() * 255;
@@ -38,6 +50,17 @@ var EffectMap = {
 	skillEffectSupport : "res/UI/skillEffectSupport.png"
 };
 
+var EffectMap2 = {
+	hero_compose_ef1 : [ "res/eff/hero_compose/hero_compose_effect_1.png", "res/eff/hero_compose/hero_compose_effect_2.png",
+			"res/eff/hero_compose/hero_compose_effect_3.png", "res/eff/hero_compose/hero_compose_effect_4.png",
+			"res/eff/hero_compose/hero_compose_effect_5.png" ],
+	hero_pull_ef1 : [],
+}
+
+for (var i = 1; i <= 15; i++) {
+	EffectMap2.hero_pull_ef1.push("res/eff/hero_compose/hero_pull_effect_1_" + i + ".png");
+}
+
 var actor = {
 	bookChara1_1 : "res/actor/bookChara1_1.png",
 	mChara1 : "res/actor/bookChara87_1.png",
@@ -56,17 +79,29 @@ var UIs = {
 	memberFaceChangeIcon1 : "res/UI/memberFaceChangeIcon1.png",
 	returnButton : "res/UI/returnButton.png",
 	header : "res/UI/header.png",
-	
-	dungeonTitleFrame1:"res/UI/dungeonTitleFrame1.png",
+
+	dungeonTitleFrame1 : "res/UI/dungeonTitleFrame1.png",
 
 	// font
 	imageNumberMemberEditType4 : "res/UI/imageNumberMemberEditType4.png",
 	imageNumberEnemyTurnRed : "res/UI/imageNumberEnemyTurnRed.png"
 }
-var UIs2 ={
-		HostileSelect: "res/UI1/FX_Frame_HostileSelect_Frame@100.png",
-		Hostile: "res/UI1/FX_Frame_Hostile_Frame@100.png"
+var UIs2 = {
+		HostileSelect : "res/UI1/FX_Frame_HostileSelect_Frame@100.png",
+		Hostile : "res/UI1/FX_Frame_Hostile_Frame@100.png"
+	}
+
+var UIs3 = {
+		StageArmor : "res/UI3/UI_EnchantBoss_Button_StageArmor.png",
+		StageSummon : "res/UI3/UI_EnchantBoss_Button_StageSummon.png",
+		StageVehicle : "res/UI3/UI_EnchantBoss_Button_StageVehicle.png",
+		StageWeapon : "res/UI3/UI_EnchantBoss_Button_StageWeapon.png"
 }
+
+for (var i = 1; i <= 12; i++) {
+	UIs3["UI_Adventure_Button_Stage"+i] = "res/UI3/UI_Adventure_Button_Stage"+i+".png";
+}
+
 
 var fonts = {
 	fontZi : {
@@ -80,4 +115,7 @@ Add_g_resources(actor);
 Add_g_resources(EffectMap);
 Add_g_resources(UIs);
 Add_g_resources(UIs2);
+Add_g_resources(UIs3);
 Add_g_resources(fonts);
+
+// Add_g_resources_inarray(EffectMap2);
