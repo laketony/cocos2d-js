@@ -4,31 +4,131 @@
 <meta charset="UTF-8">
 <title>日本界</title>
 <style>
-.worldmap{
+.mapLayer {
+	width: 4000px;
+	position: absolute; 
+}
+
+.itemLayer {
+	position: absolute; 
+}
+
+.worldmap {
+	position: absolute; 
+}
+
+.actor {
 	position: absolute;
 }
-.actor{
-	position: relative;
+.actor:HOVER{
+	border-bottom: 1px solid black;
 }
-.actorBody{
+.actorBody {
 	width: 128px;
 	position: relative;
 }
-.actorName{
- 	width: 128px; 
+
+.actorName {
+	width: 128px;
+}
+
+.doorName {
+	font-size: 25px;
+	font-weight: 700;
 }
 </style>
 
 </head>
 <body>
 
-<div class=".worldmap">
-	<div class="actor">
-		<img class="actorBody" src="res/actor/bookChara1_1.png"/><br/>
-		<img class="actorName" src="res/UI/charaName1.png"/>
+	<div class=".worldmap">
+		<img class="mapLayer" src="imgs/map.jpg" />
+		<div class="itemLayer">
+
+			<div class="actor" style="top: 0px; left: 0px;">
+				<img class="actorBody"
+					src="res/UI1/FX_Frame_CaseSelect_Frame@100.png" />
+			</div>
+		</div>
+		<div class="itemLayer">
+			<div class="actor" style="top: 1724px; left: 2044px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage1.png" />
+				<span class="doorName">灌丛</span>
+			</div>
+			<div class="actor" style="top: 1700px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage2.png" />
+			</div>
+			<div class="actor" style="top: 1600px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage3.png" />
+			</div>
+			<div class="actor" style="top: 1500px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage4.png" />
+			</div>
+			<div class="actor" style="top: 1400px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage5.png" />
+			</div>
+			<div class="actor" style="top: 1300px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage6.png" />
+			</div>
+			<div class="actor" style="top: 1200px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage7.png" />
+			</div>
+			<div class="actor" style="top: 1100px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage8.png" />
+			</div>
+			<div class="actor" style="top: 2436px; left: 55px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage9.png" />
+			</div>
+			<div class="actor" style="top: 190px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage10.png" />
+			</div>
+			<div class="actor" style="top: 180px; left: 500px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage11.png" />
+			</div>
+			<div class="actor" style="top: 170px; left: 590px;">
+				<img class="actorBody" src="res/UI3/UI_Adventure_Button_Stage12.png" />
+			</div>
+
+
+			<div class="actor" style="top: 1140px; left: 11500px;">
+				<img class="actorBody"
+					src="res/UI3/UI_EnchantBoss_Button_StageArmor.png" />
+			</div>
+			<div class="actor" style="top: 1382px; left: 2380px;" >
+				<img class="actorBody"
+					src="res/UI3/UI_EnchantBoss_Button_StageSummon.png" />
+			</div>
+			<div class="actor" style="top: 1984px; left:552px;" >
+				<img class="actorBody"
+					src="res/UI3/UI_EnchantBoss_Button_StageVehicle.png" />
+					 <span
+					class="doorName">火龙洞</span>
+			</div>
+			<div class="actor" style="top: 11400px; left: 11800px;">
+				<img class="actorBody"
+					src="res/UI3/UI_EnchantBoss_Button_StageWeapon.png" />
+			</div>
+
+
+		</div>
+		<div class="itemLayer">
+			<div class="actor" style="top: 1480px; left: 2080px;">
+				<img class="actorBody" src="res/actor/bookChara1_1.png" /><br /> <img
+					class="actorName" src="res/UI/charaName1.png" />
+			</div>
+
+		</div>
+
+
 	</div>
+	<script>
+		document.onclick = function(ev) {
+			var oEvent = ev || event;
+			var oLeft = oEvent.clientX + 'px';
+			var oTop = oEvent.clientY + 'px';
+			alert(oTop + ',' + oLeft);
 
-</div>
-
+		}
+	</script>
 </body>
 </html>
