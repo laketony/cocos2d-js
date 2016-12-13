@@ -4,16 +4,17 @@
 <meta charset="UTF-8">
 <title>日本界</title>
 <style>
+.worldmap {
+	position: relative;
+	
+}
+
 .mapLayer {
 	width: 4000px;
 	position: absolute; 
 }
 
 .itemLayer {
-	position: absolute; 
-}
-
-.worldmap {
 	position: absolute; 
 }
 
@@ -41,7 +42,7 @@
 </head>
 <body>
 
-	<div class=".worldmap">
+	<div class="worldmap">
 		<img class="mapLayer" src="imgs/map.jpg" />
 		<div class="itemLayer">
 
@@ -111,7 +112,7 @@
 
 
 		</div>
-		<div class="itemLayer">
+		<div class="itemLayer"  >
 			<div class="actor" style="top: 1480px; left: 2080px;">
 				<img class="actorBody" src="res/actor/bookChara1_1.png" /><br /> <img
 					class="actorName" src="res/UI/charaName1.png" />
@@ -121,6 +122,7 @@
 
 
 	</div>
+	<div id="center">111111111111111</div>
 	<script>
 		document.onclick = function(ev) {
 			var oEvent = ev || event;
@@ -129,6 +131,7 @@
 			alert(oTop + ',' + oLeft);
 
 		}
+		location.hash="center"
 	</script>
 </body>
 </html>
