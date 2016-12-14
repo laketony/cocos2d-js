@@ -1,0 +1,43 @@
+div {
+	
+}
+
+.worldmap {
+	position: relative;
+	top: 0px;
+	left: 0px; 
+}
+
+.mapLayer {
+	width: 4000px;
+	position: absolute;
+}
+
+.itemLayer {
+	position: relative; 
+}
+
+
+.actor {
+	position: absolute;
+}
+
+.actor:HOVER {
+	border: 1px solid black;
+}
+
+.actorBody {
+	width: 128px;
+}
+
+.actorName {
+	width: 128px;
+}
+
+.doorName {
+	font-family: "Î¢ÈíÑÅºÚ";
+	font-size: 15px;
+	font-weight: 300;
+	color: black;
+	background-color: rgba(255, 255, 255, 0.7);
+}

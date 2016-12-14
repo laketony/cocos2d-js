@@ -110,7 +110,44 @@ var EffectAnim = {
 			animation.setRestoreOriginalFrame(false); // 动画执行后还原初始状态
 	
 			// ////////////////动画结束///////////////////
-			var A3Anim = cc.animate(animation);
-		return A3Anim;
+			var AAnim = cc.animate(animation);
+		return AAnim;
+	},
+	BGeter : function(selectColumnStart,selectColumn,selectRow,time) {	
+		//
+		effonename = EffectMap.playerAttackEffect;
+		column = 8;
+		row = 8;
+		//
+		var textureEffect = cc.textureCache.addImage(effonename);
+		var widthOne = textureEffect.width/row;
+		var heightOne = textureEffect.height/column;
+		
+		// /////////////动画开始//////////////////////
+		var animation = new cc.Animation();
+		for (var j = selectColumnStart; j <selectColumnStart+selectColumn; j++) {
+			for (var i = 0; i < selectRow; i++) {
+				var rect = cc.rect(i * widthOne, j * heightOne, widthOne, heightOne);
+				animation.addSpriteFrameWithTexture(textureEffect, rect);
+			}
+		}
+		animation.setDelayPerUnit(time/(selectColumn*selectRow)); // 设置两个帧播放时间
+		animation.setRestoreOriginalFrame(false); // 动画执行后还原初始状态
+
+		// ////////////////动画结束///////////////////
+		var BAnim = cc.animate(animation);
+		return BAnim;
+	},
+	B1Geter : function(effonename) {
+		return EffectAnim.BGeter(6,2,8,1);
+	},
+	B2Geter : function(effonename) {
+		return EffectAnim.BGeter(2,2,8,1);
+	},
+	B3Geter : function(effonename) {
+		return EffectAnim.BGeter(4,2,8,1);
+	},
+	B4Geter : function(effonename) {
+		return EffectAnim.BGeter(6,2,8,1);
 	}
 };

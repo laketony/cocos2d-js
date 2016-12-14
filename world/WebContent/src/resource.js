@@ -47,7 +47,8 @@ var EffectMap = {
 	playerGameOverEffect : "res/UI/playerGameOverEffect.png",
 	skillEffectAttackUp : "res/UI/skillEffectAttackUp.png",
 	skillEffectAttack : "res/UI/skillEffectAttack.png",
-	skillEffectSupport : "res/UI/skillEffectSupport.png"
+	skillEffectSupport : "res/UI/skillEffectSupport.png",
+	playerAttackEffect: "res/UI/playerAttackEffect.png"
 };
 
 var EffectMap2 = {
@@ -87,6 +88,7 @@ var UIs = {
 	imageNumberEnemyTurnRed : "res/UI/imageNumberEnemyTurnRed.png"
 }
 var UIs2 = {
+		HostileBG:"res/UI1/FX_Frame_HostileSelect_Back@100.png",
 		HostileSelect : "res/UI1/FX_Frame_HostileSelect_Frame@100.png",
 		Hostile : "res/UI1/FX_Frame_Hostile_Frame@100.png"
 	}

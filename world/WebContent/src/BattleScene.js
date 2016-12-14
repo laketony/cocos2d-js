@@ -37,7 +37,7 @@ var BattleScene = cc.Scene.extend({
 		var player= new cc.Sprite(actor.bookChara1_1);
 		player.setAnchorPoint(0.5,0);
 		player.setPosition(centerPos.x,0);
-		player.HP = 2500;
+		player.HP = 7620;
 		this.addChild(player);
 		
 		
@@ -47,7 +47,7 @@ var BattleScene = cc.Scene.extend({
 			monsters.startActiuon(player);
 			
 		}
-			
+
  
 		
 		// 战斗面板
@@ -60,8 +60,38 @@ var BattleScene = cc.Scene.extend({
 		 var combatLayerColor = new cc.LayerColor(cc.color(0, 0, 0,128), winSize.width,
 				 280);
 		 combatLayer.addChild(combatLayerColor, 0);
-
 		 
+		// 出招面板
+		var labelHP  = cc.LabelTTF.create("HP:"+player.HP, "fontZi", 35); 
+		labelHP.setAnchorPoint(cc.p(0.0, 0.0));
+		labelHP.setPosition(cc.p(20,10));
+		labelHP.setFontFillColor(cc.color(255,255,255)); 
+		combatLayer.addChild(labelHP);
+ 
+		player.labelHP = labelHP; 
+		player.divHP=function(divValue){
+			
+			var lues = divValue;
+			var labelAttr = initLabelAtlas2(lues);
+			labelAttr.setPosition(this.width/2, this.height);
+			this.addChild(labelAttr);
+			
+			var showMove = cc.moveBy(cc.random0To1()+0.5, cc.p(cc.randomMinus1To1() * 100, 35 * 4));
+			var showRemove = cc.removeSelf(true);
+			var shows = cc.sequence(showMove, showRemove);
+			labelAttr.runAction(shows);
+			
+			
+			this.HP-=divValue;
+			var actionBy = cc.moveBy(0.1, cc.p(0, -3));
+			var actionByBack = actionBy.reverse(); 
+			this.runAction(cc.sequence(actionBy, actionByBack));
+			
+			if(this.HP<=0){
+				this.parent.warOver(false);
+			}
+			this.labelHP.setString("HP:"+this.HP); 
+		}
 		 // ------------战斗条--------------
 		 var combatBox  = new cc.Layer();
 		combatBox.setPosition(55,240);
@@ -133,7 +163,7 @@ var BattleScene = cc.Scene.extend({
 	},
 	acaii : function(tager) {
 		
-		//--------
+		// --------
 		console.log("acaii HP: "+tager.player.HP);
 		if(tager.player.HP<=0){
 			tager.scene.warOver(false);
@@ -196,7 +226,7 @@ var BattleScene = cc.Scene.extend({
 				labelDraw.drawSegment(cc.p(35*(ziLength-ziNum),0), cc.p(35*(ziLength),0), lineWidth, lineColor);
 			}
 			
-			//labelDraw.x = labelDraw.x - 35*addZinum;
+			// labelDraw.x = labelDraw.x - 35*addZinum;
 			
 			 var winSize = cc.director.getWinSize();
 			 var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
@@ -287,19 +317,27 @@ var SKCard = cc.Sprite.extend({
 	textIndex:1,
 	label:null,
 	isSeleced:false,
+	borderSprite:null,
 	cardNN : ["临","兵","斗","者","皆","阵","列","前","行"],
 	ctor : function(name,text) {
-		this._super(UIs2.Hostile);
+		this._super(UIs2.HostileBG);
 		this.text = text;
-		this.init(UIs2.Hostile);
+		this.init(UIs2.HostileBG);
 	},
 	// 添加自己的属性和方法
 	init : function(texture) {
 		this._super(texture);
+		
+		var selfCenter = cc.p(this.width/2,this.height/2);
+		
+		var borderSprite  = this.borderSprite =  new cc.Sprite(UIs2.Hostile);
+		borderSprite.setPosition(selfCenter);
+		this.addChild(borderSprite);
+		
 		var label =this.label = cc.LabelTTF.create(this.text, "fontZi", 55);
 		label.setString(this.text);
 		label.setAnchorPoint(cc.p(0.5, 0.5));
-		label.setPosition(cc.p(50,45));
+		label.setPosition(selfCenter);
 		label.setFontFillColor(cc.color(255,255,255));
 		this.addChild(label, 1);
 		
@@ -326,11 +364,23 @@ var SKCard = cc.Sprite.extend({
 	},
 	select: function() {
 		this.isSeleced=true;
-		this.setTexture(UIs2.HostileSelect);
+		this.borderSprite.setTexture(UIs2.HostileSelect);//HostileSelect
+		this.borderSprite.runAction(this.borderAction());
 	},
 	normal: function() {
 		this.isSeleced=false;
-		this.setTexture(UIs2.Hostile);
+		this.borderSprite.setTexture(UIs2.Hostile);
+		this.borderSprite.rotation = 0;
+		this.borderSprite.stopActionByTag("0xbb");
+	},
+	borderAction: function() {
+		
+		var actionBy = cc.rotateBy(1.2, 360);
+		var reAction = actionBy.repeatForever();
+		reAction.setTag("0xbb");
+		console.log(reAction);
+		return reAction;
+
 	},
 	changeSelect(){
 		this.isSeleced=!this.isSeleced;
@@ -395,13 +445,13 @@ var jinengliebiao = {
 
 
 function skillMatching(numberString){
-//	console.log("9尾字 "+numberString)
+// console.log("9尾字 "+numberString)
 	
 	var relaunch_Skills = null;
 	var ziLong = numberString.length
 	for(var i = 1;i<=ziLong;i++){
 		var skillKey = numberString.substring(ziLong-i);
-//		console.log("技能招式 "+skillKey)
+// console.log("技能招式 "+skillKey)
 		var launch_Skills = jinengliebiao[skillKey];
 		if(launch_Skills){ 
 			launch_Skills.SkillZiNum = skillKey.length;
@@ -409,7 +459,7 @@ function skillMatching(numberString){
 		}
 	}
 	
-//	console.log("技能 "+relaunch_Skills)
+// console.log("技能 "+relaunch_Skills)
 	return relaunch_Skills;
 	
 }

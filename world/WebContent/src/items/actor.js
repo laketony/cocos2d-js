@@ -50,21 +50,24 @@ var MonsterSprite = cc.Sprite.extend({
 
 		var attack_interval = cc.delayTime(3);
 		var attarCallFunc = cc.callFunc(this.attarFunc,this);
-		this.attarAction1 = cc.sequence(attack_interval, attarCallFunc).repeatForever();
+		var attack_delay =  cc.delayTime(cc.random0To1()*3);
+		var attack_loop = cc.sequence(attack_interval, attarCallFunc).repeatForever();
+		this.attarAction1 =attack_loop;// cc.sequence(attack_delay, attack_loop);
 
 	},
 	attarFunc : function(age1, age2) {
-
+		//向目标发送攻击,让其掉血
 		var lues = Math.floor(cc.rand() % 250+100);
-		var labelAttr = initLabelAtlas2(lues);
-		labelAttr.setPosition(this.tager.width/2, this.tager.height);
+		var labelAttr = new cc.Sprite();
+		labelAttr.setPosition(this.tager.width/2+145*cc.randomMinus1To1(), this.tager.height/2+145*cc.random0To1());
 		this.tager.addChild(labelAttr);
-		this.tager.HP-=lues;
-		
-		var showMove = cc.moveBy(cc.random0To1()+0.5, cc.p(cc.randomMinus1To1() * 100, 35 * 4));
+
+		var showEff = EffectAnim.B1Geter();
 		var showRemove = cc.removeSelf(true);
-		var shows = cc.sequence(showMove, showRemove);
+		var shows = cc.sequence(showEff, showRemove);
 		labelAttr.runAction(shows);
+		//出发目标扣除生命事件
+		this.tager.divHP(lues); 
 	},
 	hurtFunc : function(age1, age2) {
 
