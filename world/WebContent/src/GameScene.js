@@ -12,7 +12,7 @@ var GameScene = cc.Scene.extend({
 	onEnter : function() {
 		this._super();
 		console.log("GameScene onEnter");
-		
+		audioEngine.playMusic("res/sound/bgm/naruto/naruto-选择.mp3",true);
 	},
 	createScene : function() {
 		var winSize = cc.director.getWinSize();

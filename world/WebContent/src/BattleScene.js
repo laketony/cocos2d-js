@@ -5,6 +5,7 @@ var BattleScene = cc.Scene.extend({
 	ctor: function() {
 		this._super();
 		this.createScene();
+		audioEngine.playMusic("res/sound/bgm/运行主题.mp3",true);
 	},
 	onEnter : function() {
 		this._super();
@@ -22,32 +23,40 @@ var BattleScene = cc.Scene.extend({
 
 		
 		for (var i = -1.5; i <= 1; i++) {
-			for (var j = 0; j < 2; j++) {
+			for (var j = 2; j >0; j--) {
 				// 怪物区
 				var bgSprite1  = new MonsterSprite(actor.mChara1,10);
 				bgSprite1.setPosition(centerPos.x+140*i+70,centerPos.y+100+130*j);
 				bgSprite1.setScale(0.4);
 				this.addChild(bgSprite1);
 				this.monsters.push(bgSprite1);
+				
 			}
 		}
 		
 	   
-		 
+		// 最前窗口
+		var skillLayer  = new cc.Layer();
+		skillLayer.centerPos = centerPos;
+		this.addChild(skillLayer);
+		this.skillLayer = skillLayer;
+		
 		var player= new cc.Sprite(actor.bookChara1_1);
 		player.setAnchorPoint(0.5,0);
 		player.setPosition(centerPos.x,0);
-		player.HP = 7620;
+		player.HP = 2650;
 		this.addChild(player);
 		
 		
-		console.log();
+		 
 		for(var index in this.monsters){
 			var monsters = this.monsters[index];
 			monsters.startActiuon(player);
 			
 		}
 
+//		var monsters = this.monsters[0];
+//		monsters.startActiuon(player);
  
 		
 		// 战斗面板
@@ -158,6 +167,8 @@ var BattleScene = cc.Scene.extend({
 		label.addChild(labelDraw);
 		// 出招面板
 		
+
+		
 		cc.eventManager.addListener(this.listenerScene, this);
 
 	},
@@ -242,19 +253,59 @@ var BattleScene = cc.Scene.extend({
 			 if(skillBean.Sound){
 				 audioEngine.playEffect(skillBean.Sound); 
 			 }
-			 
 		}
-		
-		console.log();
-		for(var index in tager.scene.monsters){
-			var monsters = tager.scene.monsters[index];
+		var allorone = Math.floor(cc.random0To1()*100);
+		console.log(allorone);
+		if(allorone>90){
+			for(var index in tager.scene.monsters){
+				var monsters = tager.scene.monsters[index];
+				if(skillBean){
+					monsters.hurtFunc(350);
+				}else{
+					monsters.hurtFunc(150);
+				}
+			}
+			
+			var skillLayer = tager.scene.skillLayer;
+						
+			//动画效果
+			var kkGlode = new cc.Sprite(EffectUNLoad.wing); 
+			kkGlode.setPosition(skillLayer.centerPos.x,250 );
+			kkGlode.scale = 0.4;
+			var step1 = cc.scaleTo(0.2, 6);
+			var step2 =cc.delayTime(0.5);
+			var stepRm = cc.removeSelf(false);
+			var seq = cc.sequence([step1,step2,stepRm]); 
+			kkGlode.runAction(seq);
+			skillLayer.addChild(kkGlode); 
+
+			//音效
+			audioEngine.playEffect("res/sound/HP08.ogg");  
+			
+			//实际作用
+			tager.player.HP+=100;
+			
+		}else{
+			var monsters = tager.scene.monsters[0];
 			if(skillBean){
 				monsters.hurtFunc(1500);
 			}else{
 				monsters.hurtFunc(50);
 			}
-			
+			var kkGlode = new cc.Sprite(EffectMap.darkboom01); 
+			kkGlode.setPosition(monsters.width/2,monsters.height/2 );
+			kkGlode.scale = 1.5;
+			var step1 = cc.scaleTo(0.2, 0.4);
+			var step2 =cc.delayTime(0.5);
+			var stepRm = cc.removeSelf(false);
+			var seq = cc.sequence([step1,step2,stepRm]); 
+			kkGlode.runAction(seq);
+			monsters.addChild(kkGlode);
+			//音效
+			audioEngine.playEffect("res/sound/Attr01.ogg");  
 		}
+		
+		
 		
 	},
 	warOver : function(isWin) {

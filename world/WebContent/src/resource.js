@@ -48,8 +48,19 @@ var EffectMap = {
 	skillEffectAttackUp : "res/UI/skillEffectAttackUp.png",
 	skillEffectAttack : "res/UI/skillEffectAttack.png",
 	skillEffectSupport : "res/UI/skillEffectSupport.png",
-	playerAttackEffect: "res/UI/playerAttackEffect.png"
+	playerAttackEffect: "res/UI/playerAttackEffect.png",
+	debuff: "res/eff/debuff@2x.png",
+	darkboom01: "res/eff/darkboom01@2x.png",
+	
 };
+var EffectUNLoad = {
+		item_background_1:"res/eff/item_background_1@2x.png",
+		item_background_2:"res/eff/item_background_2@2x.png",
+		item_background_3:"res/eff/item_background_3@2x.png",
+		wing:"res/eff/wing@2x.png",
+	
+		
+}
 
 var EffectMap2 = {
 	hero_compose_ef1 : [ "res/eff/hero_compose/hero_compose_effect_1.png", "res/eff/hero_compose/hero_compose_effect_2.png",

@@ -42,7 +42,7 @@ var EffectAnim = {
 					animation.addSpriteFrameWithFile(frameName);
 				}
 				
-				animation.setDelayPerUnit(0.9 / (EffectMap2.hero_pull_ef1.length));
+				animation.setDelayPerUnit(1.5 / (EffectMap2.hero_pull_ef1.length));
 				animation.setRestoreOriginalFrame(false);
 
 				this.A3Anim = cc.animate(animation);
@@ -138,16 +138,48 @@ var EffectAnim = {
 		var BAnim = cc.animate(animation);
 		return BAnim;
 	},
+	B0Geter : function(effonename) {
+		return   EffectAnim.BGeter(0,8,8,2);
+	},
 	B1Geter : function(effonename) {
-		return EffectAnim.BGeter(6,2,8,1);
+		return   EffectAnim.BGeter(0,2,8,1);
 	},
 	B2Geter : function(effonename) {
-		return EffectAnim.BGeter(2,2,8,1);
+
+		return EffectAnim.BGeter(2,2,8,1); // EffectAnim.BGeter(2,2,8,1);
 	},
 	B3Geter : function(effonename) {
+
 		return EffectAnim.BGeter(4,2,8,1);
 	},
 	B4Geter : function(effonename) {
+
 		return EffectAnim.BGeter(6,2,8,1);
+	},
+	BGererInArray : function(index) {
+		var baction =null;
+		var randomIndex = Math.floor(cc.random0To1()*5);
+		console.log(randomIndex);
+		switch(randomIndex){
+		case 0: 
+			baction = this.B0Geter();
+			break;
+		case 1: 
+			baction = this.B1Geter();
+			break;
+		case 2: 
+			baction = this.B2Geter();
+			break;
+		case 3: 
+			baction = this.B3Geter();
+			break;
+		case 4: 
+			baction = this.B4Geter();
+			break;
+		}
+		if(!baction){
+			baction = this.B1Geter();
+		}
+		return baction;
 	}
 };

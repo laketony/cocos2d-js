@@ -48,21 +48,33 @@ var MonsterSprite = cc.Sprite.extend({
 		bgSprite4.setPosition(this.width, this.height);
 		this.addChild(bgSprite4);
 
-		var attack_interval = cc.delayTime(3);
+		var attack_interval_time = cc.random0To1()*3+4;		
+		var attack_interval = cc.delayTime(attack_interval_time);
 		var attarCallFunc = cc.callFunc(this.attarFunc,this);
-		var attack_delay =  cc.delayTime(cc.random0To1()*3);
-		var attack_loop = cc.sequence(attack_interval, attarCallFunc).repeatForever();
-		this.attarAction1 =attack_loop;// cc.sequence(attack_delay, attack_loop);
+
+		var attack_action = cc.sequence(attack_interval, attarCallFunc);
+		
+		var actionBy1 = cc.moveBy(0.3, cc.p(0, -60));
+		var actionBy1Back = actionBy1.reverse(); 
+		var actionBy2 = cc.scaleBy(0.3, 1.5);
+		var actionBy2Back = actionBy2.reverse(); 
+		
+		
+		var attack_motion =cc.spawn([cc.sequence(actionBy1, actionBy1Back),cc.sequence(actionBy2, actionBy2Back)]) ;
+		
+		
+		var attack_loop = cc.sequence(attack_interval,attack_motion ,attarCallFunc).repeatForever();
+		this.attarAction1 = attack_loop;
 
 	},
 	attarFunc : function(age1, age2) {
 		//向目标发送攻击,让其掉血
-		var lues = Math.floor(cc.rand() % 250+100);
+		var lues = Math.floor(cc.random0To1()*20+10);
 		var labelAttr = new cc.Sprite();
 		labelAttr.setPosition(this.tager.width/2+145*cc.randomMinus1To1(), this.tager.height/2+145*cc.random0To1());
 		this.tager.addChild(labelAttr);
 
-		var showEff = EffectAnim.B1Geter();
+		var showEff = EffectAnim.BGererInArray();
 		var showRemove = cc.removeSelf(true);
 		var shows = cc.sequence(showEff, showRemove);
 		labelAttr.runAction(shows);
@@ -84,7 +96,16 @@ var MonsterSprite = cc.Sprite.extend({
 	},
 	startActiuon : function(iTager) {
 		this.tager = iTager;
-		this.runAction(this.attarAction1);
+		
+		var waitTime = cc.random0To1()*3;		
+		console.log(waitTime);
+		var attack_delay =  cc.delayTime(waitTime);
+		var attarCallFunc = cc.callFunc(this.waitToActtar,this);
+		var attack_wait = cc.sequence(attarCallFunc, attarCallFunc);
+		this.runAction(attack_wait);
 	},
+	waitToActtar : function(iTager) {
+		this.runAction(this.attarAction1);
+	}
 	
 });
