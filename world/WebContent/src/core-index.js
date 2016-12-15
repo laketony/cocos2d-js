@@ -4,7 +4,7 @@ window.onload = function() {
 		// load resources
 		cc.view
 				.setDesignResolutionSize(640, 1136,
-						cc.ResolutionPolicy.SHOW_ALL);
+						cc.ResolutionPolicy.FIXED_HEIGHT);
 
 		cc.LoaderScene.preload(g_resources, function() {
 			cc.director.runScene(new GameScene());

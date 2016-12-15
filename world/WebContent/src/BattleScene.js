@@ -1,11 +1,15 @@
 var audioEngine=cc.audioEngine;
+//var audioEngine = {
+//		playMusic:function() {},
+//		playEffect:function() {}
+//};
 var BattleScene = cc.Scene.extend({
 	
 	monsters:[],
 	ctor: function() {
 		this._super();
 		this.createScene();
-		audioEngine.playMusic("res/sound/bgm/运行主题.mp3",true);
+		audioEngine.playMusic("res/sound/bgm/战斗00.mp3",true);
 	},
 	onEnter : function() {
 		this._super();
@@ -109,11 +113,11 @@ var BattleScene = cc.Scene.extend({
 		
 		var combatOverX = winSize.width*0.8;
 		
-		var combatStop  = new cc.Sprite("res/UI1/FX_Frame_CaseSelect_Frame@100.png");
+		var combatStop  = new cc.Sprite(UIs1.CaseSelect_FrameX100);
 		combatStop.setPosition(combatOverX,0);
 		combatBox.addChild(combatStop);
 		
-		var combatSpp  = new cc.Sprite("res/UI/homeLightEffect.png");
+		var combatSpp  = new cc.Sprite(UIs.attrLight);
 		combatBox.addChild(combatSpp);
 		
 
@@ -181,7 +185,6 @@ var BattleScene = cc.Scene.extend({
 		}
 		
 		//
-		
 		
 		var addZinum = 0;
 		for ( var sk_card_index in tager.skCardArray) {
@@ -254,9 +257,12 @@ var BattleScene = cc.Scene.extend({
 				 audioEngine.playEffect(skillBean.Sound); 
 			 }
 		}
+		
+		
+		
 		var allorone = Math.floor(cc.random0To1()*100);
-		console.log(allorone);
-		if(allorone>90){
+//		console.log(allorone);
+		if(allorone>90){ 
 			for(var index in tager.scene.monsters){
 				var monsters = tager.scene.monsters[index];
 				if(skillBean){
@@ -285,24 +291,43 @@ var BattleScene = cc.Scene.extend({
 			//实际作用
 			tager.player.HP+=100;
 			
-		}else{
+		}else if(allorone>70){
 			var monsters = tager.scene.monsters[0];
-			if(skillBean){
-				monsters.hurtFunc(1500);
-			}else{
-				monsters.hurtFunc(50);
-			}
+
+			var attarHurtFunc = cc.callFunc(monsters.hurtFunc,monsters, 50);
+			
 			var kkGlode = new cc.Sprite(EffectMap.darkboom01); 
 			kkGlode.setPosition(monsters.width/2,monsters.height/2 );
 			kkGlode.scale = 1.5;
 			var step1 = cc.scaleTo(0.2, 0.4);
 			var step2 =cc.delayTime(0.5);
 			var stepRm = cc.removeSelf(false);
-			var seq = cc.sequence([step1,step2,stepRm]); 
+			var seq = cc.sequence([step1,attarHurtFunc,step2,stepRm]); 
 			kkGlode.runAction(seq);
 			monsters.addChild(kkGlode);
 			//音效
 			audioEngine.playEffect("res/sound/Attr01.ogg");  
+		}else{
+			for(var index in tager.scene.monsters){
+				var monsters = tager.scene.monsters[index];
+			}
+			var monsters = tager.scene.monsters[0];
+			var skillLayer = tager.scene.skillLayer;
+				
+			//动画效果
+			var kkGlode = new cc.Sprite("res/eff/data.dat_000079.png"); 
+			kkGlode.setPosition(cc.p(monsters.width/2,monsters.height+150)); 
+			var step1 = cc.moveTo(0.2, cc.p(monsters.width/2,monsters.height/2)); 
+			var attarHurtFunc = cc.callFunc(monsters.hurtFunc,monsters, 50);
+			var step2 =cc.delayTime(0.5);
+			var stepRm = cc.removeSelf(false);
+			var seq = cc.sequence([step1,attarHurtFunc,step2,stepRm]); 
+			kkGlode.runAction(seq);
+			monsters.addChild(kkGlode); 
+
+			//音效
+			audioEngine.playEffect("res/sound/HP08.ogg");  
+			
 		}
 		
 		
@@ -371,9 +396,9 @@ var SKCard = cc.Sprite.extend({
 	borderSprite:null,
 	cardNN : ["临","兵","斗","者","皆","阵","列","前","行"],
 	ctor : function(name,text) {
-		this._super(UIs2.HostileBG);
+		this._super(UIs1.HostileBG);
 		this.text = text;
-		this.init(UIs2.HostileBG);
+		this.init(UIs1.HostileBG);
 	},
 	// 添加自己的属性和方法
 	init : function(texture) {
@@ -381,7 +406,7 @@ var SKCard = cc.Sprite.extend({
 		
 		var selfCenter = cc.p(this.width/2,this.height/2);
 		
-		var borderSprite  = this.borderSprite =  new cc.Sprite(UIs2.Hostile);
+		var borderSprite  = this.borderSprite =  new cc.Sprite(UIs1.Hostile);
 		borderSprite.setPosition(selfCenter);
 		this.addChild(borderSprite);
 		
@@ -415,12 +440,12 @@ var SKCard = cc.Sprite.extend({
 	},
 	select: function() {
 		this.isSeleced=true;
-		this.borderSprite.setTexture(UIs2.HostileSelect);//HostileSelect
+		this.borderSprite.setTexture(UIs1.HostileSelect);//HostileSelect
 		this.borderSprite.runAction(this.borderAction());
 	},
 	normal: function() {
 		this.isSeleced=false;
-		this.borderSprite.setTexture(UIs2.Hostile);
+		this.borderSprite.setTexture(UIs1.Hostile);
 		this.borderSprite.rotation = 0;
 		this.borderSprite.stopActionByTag("0xbb");
 	},

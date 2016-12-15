@@ -96,12 +96,17 @@ var UIs = {
 
 	// font
 	imageNumberMemberEditType4 : "res/UI/imageNumberMemberEditType4.png",
-	imageNumberEnemyTurnRed : "res/UI/imageNumberEnemyTurnRed.png"
+	imageNumberEnemyTurnRed : "res/UI/imageNumberEnemyTurnRed.png",
+	attrLight :"res/UI/homeLightEffect.png"
 }
-var UIs2 = {
+var UIs1 = {
 		HostileBG:"res/UI1/FX_Frame_HostileSelect_Back@100.png",
 		HostileSelect : "res/UI1/FX_Frame_HostileSelect_Frame@100.png",
-		Hostile : "res/UI1/FX_Frame_Hostile_Frame@100.png"
+		Hostile : "res/UI1/FX_Frame_Hostile_Frame@100.png",
+		Select_Hostile : "res/UI1/FX_Select_Hostile.png",
+		CaseSelect_FrameX100 :"res/UI1/FX_Frame_CaseSelect_Frame@100.png",
+		CaseSelect_Frame : "res/UI1/FX_Frame_CaseSelect_Frame.png"
+		
 	}
 
 var UIs3 = {
@@ -127,7 +132,7 @@ var fonts = {
 Add_g_resources(actor);
 Add_g_resources(EffectMap);
 Add_g_resources(UIs);
-Add_g_resources(UIs2);
+Add_g_resources(UIs1);
 Add_g_resources(UIs3);
 Add_g_resources(fonts);
 

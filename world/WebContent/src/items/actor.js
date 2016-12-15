@@ -44,9 +44,16 @@ var MonsterSprite = cc.Sprite.extend({
 		// bgSprite3.setPosition(0, this.height);
 		// this.addChild(bgSprite3);
 
-		var bgSprite4 = new cc.Sprite("res/UI1/FX_Select_Hostile.png");
-		bgSprite4.setPosition(this.width, this.height);
-		this.addChild(bgSprite4);
+// var bgSprite4 = new cc.Sprite(UIs1.Select_Hostile);
+// bgSprite4.setPosition(this.width, this.height);
+// this.addChild(bgSprite4);
+//		
+// var bgSprite2 = new cc.Sprite(UIs1.CaseSelect_Frame );
+// bgSprite2.setPosition(this.width/2, this.height/2);
+// this.addChild(bgSprite2);
+		
+		
+		
 
 		var attack_interval_time = cc.random0To1()*3+4;		
 		var attack_interval = cc.delayTime(attack_interval_time);
@@ -81,12 +88,15 @@ var MonsterSprite = cc.Sprite.extend({
 		//出发目标扣除生命事件
 		this.tager.divHP(lues); 
 	},
-	hurtFunc : function(age1, age2) {
-
+	hurtFunc : function(age1, divHP) {
+		if(!divHP){
+			divHP = age1;
+		}
 		var lues = Math.floor(cc.rand() % 5000);
-		var labelAttr = initLabelAtlas2(age1);
+		var labelAttr = initLabelAtlas2(divHP);
 		labelAttr.setLocalZOrder(10);
 		labelAttr.setPosition(this.width/2, this.height);
+		console.log(this);
 		this.addChild(labelAttr);
 
 		var showMove = cc.moveBy(cc.random0To1()+0.5, cc.p(cc.randomMinus1To1() * 100, 35 * 4));
@@ -98,7 +108,7 @@ var MonsterSprite = cc.Sprite.extend({
 		this.tager = iTager;
 		
 		var waitTime = cc.random0To1()*3;		
-		console.log(waitTime);
+//		console.log(waitTime);
 		var attack_delay =  cc.delayTime(waitTime);
 		var attarCallFunc = cc.callFunc(this.waitToActtar,this);
 		var attack_wait = cc.sequence(attarCallFunc, attarCallFunc);

@@ -83,6 +83,20 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		// console.log(target);
 		// console.log(locationInNode);
 		// console.log(target.width + " " + target.height);
+		
+		for(var index in target.playerLayer.children ){
+			var item = target.playerLayer.children[index];
+			var locationInNode = item.convertToNodeSpace(touch.getLocation());
+			
+			var rect = cc.rect(0,0,item.width,item.height);
+			if(cc.rectContainsPoint(rect, locationInNode)){
+				var yuanScale = item.scale;
+				item.scale = 0.4;
+				var step = cc.scaleTo(0.2, yuanScale);
+				item.runAction(step);
+			}
+		
+		}
 
 		
 		return true;

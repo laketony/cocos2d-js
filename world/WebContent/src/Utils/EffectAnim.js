@@ -159,7 +159,7 @@ var EffectAnim = {
 	BGererInArray : function(index) {
 		var baction =null;
 		var randomIndex = Math.floor(cc.random0To1()*5);
-		console.log(randomIndex);
+//		console.log(randomIndex);
 		switch(randomIndex){
 		case 0: 
 			baction = this.B0Geter();
