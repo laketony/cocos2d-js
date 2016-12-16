@@ -94,10 +94,8 @@ var WindowLayer = cc.Layer.extend({
 			// 获取当前触摸点相对于按钮所在的坐标
 			var rect = cc.rect(0, 0, 150, 150);
 			if(cc.rectContainsPoint(rect, locationInNode)){
-				var scene = new BattleScene();
-				var trans = new cc.TransitionProgressInOut(1,scene);
-				cc.director.pushScene(scene);
-				return false;
+				console.log("玫瑰花");
+				return true;
 			}
 			
 			var kkGlode = new cc.Sprite();

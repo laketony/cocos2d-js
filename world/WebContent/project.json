@@ -11,6 +11,7 @@
 		"src/layer/PlayerLayer.js",
 		"src/layer/WindowLayer.js",
 		"src/items/actor.js",
+		"src/items/itemll.js",
 		"src/Utils/EffectAnim.js",
 		"src/BattleScene.js",
 		"src/layer/Battle_Layers.js"

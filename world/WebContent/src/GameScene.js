@@ -72,7 +72,9 @@ var GameScene = cc.Scene.extend({
 var ListenerWorldMapLayer = cc.EventListener.create({
 	event : cc.EventListener.TOUCH_ONE_BY_ONE,
 	swallowTouches : false, // 设置是否吞没事件，在 onTouchBegan 方法返回 true 时吞掉事件，不再向下传递。
+	isMoved:false,
 	onTouchBegan : function(touch, event) { // 实现 onTouchBegan 事件处理回调函数A
+		this.isMoved = false;
 		var target = event.getCurrentTarget(); // 获取事件所绑定的 target,
 		// 通常是cc.Node及其子类
 
@@ -90,20 +92,17 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 			
 			var rect = cc.rect(0,0,item.width,item.height);
 			if(cc.rectContainsPoint(rect, locationInNode)){
-				var yuanScale = item.scale;
 				item.scale = 0.4;
-				var step = cc.scaleTo(0.2, yuanScale);
+				var step = cc.scaleTo(0.2, item.scaleInit);
 				item.runAction(step);
 			}
 		
 		}
-
-		
 		return true;
 	},
 	onTouchMoved : function(touch, event) {
 		// 实现onTouchMoved事件处理回调函数, 触摸移动时触发
-
+		this.isMoved = true;
 		// 移动当前按钮精灵的坐标位置
 		var target = event.getCurrentTarget();
 		var delta = touch.getDelta(); // 获取事件数据: delta
@@ -115,13 +114,27 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		target.playerLayer.y += delta.y ;
 	},
 	onTouchEnded : function(touch, event) {
+		if(this.isMoved == true)
+			return;
 		// 实现onTouchEnded事件处理回调函数
 		var target = event.getCurrentTarget();
 
 		// 获取当前触摸点相对于按钮所在的坐标
 		var locationInNode = target.convertToNodeSpace(touch.getLocation());
 		// console.log(locationInNode);
-
+		
+		for(var index in target.playerLayer.children ){
+			var item = target.playerLayer.children[index];
+			var locationInNode = item.convertToNodeSpace(touch.getLocation());
+			
+			var rect = cc.rect(0,0,item.width,item.height);
+			if(cc.rectContainsPoint(rect, locationInNode)){
+				
+				var scene = new BattleScene();
+				var trans = new cc.TransitionProgressInOut(1,scene);
+				cc.director.pushScene(scene); 
+			}
+		}
 	}
 });
 

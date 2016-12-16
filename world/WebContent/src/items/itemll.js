@@ -55,3 +55,44 @@ var PaoDanBase = cc.Sprite.extend({
 		spr_dao1.addChild(draw1);
 	}
 });
+/**
+ * 远程攻击炮弹 玩家射击向怪兽的子弹
+ * 
+ */
+var DoorBase = cc.Sprite.extend({
+	at : 1,
+	imageUriArray : null,
+	bean:null,
+	ctor : function(bean) {
+		this.bean = bean;
+		this._super(bean.texture);
+		this.init(bean.texture);
+	},
+	// 添加自己的属性和方法
+	init : function(texture) {
+		this._super(texture);
+		var doorBean = this.bean;
+		
+		var war_bingdao = new cc.Sprite(doorBean.texture); 
+		war_bingdao.setPosition(this.width/2,this.height/2);
+		war_bingdao.zIndex = -1;
+		
+		var fontDef = new cc.FontDefinition();
+		fontDef.fontName = "fontZi";
+		fontDef.fontSize = "32";
+		
+		var myLabel = new cc.LabelTTF(doorBean.name, fontDef);
+		myLabel.setAnchorPoint(0.5, 1);
+		myLabel.setPosition(war_bingdao.width / 2, 0);
+		this.addChild(myLabel);
+		
+		var actionBy = cc.moveBy(1, cc.p(0, 7));
+		var actionByBack = actionBy.reverse();
+		var fudong = cc.sequence(actionBy, actionByBack).repeatForever();
+
+		
+		this.addChild(war_bingdao);
+		war_bingdao.runAction(fudong);
+	}
+});
+

@@ -1,8 +1,8 @@
 var audioEngine=cc.audioEngine;
-//var audioEngine = {
-//		playMusic:function() {},
-//		playEffect:function() {}
-//};
+// var audioEngine = {
+// playMusic:function() {},
+// playEffect:function() {}
+// };
 var BattleScene = cc.Scene.extend({
 	
 	monsters:[],
@@ -59,8 +59,8 @@ var BattleScene = cc.Scene.extend({
 			
 		}
 
-//		var monsters = this.monsters[0];
-//		monsters.startActiuon(player);
+// var monsters = this.monsters[0];
+// monsters.startActiuon(player);
  
 		
 		// 战斗面板
@@ -261,7 +261,7 @@ var BattleScene = cc.Scene.extend({
 		
 		
 		var allorone = Math.floor(cc.random0To1()*100);
-//		console.log(allorone);
+// console.log(allorone);
 		if(allorone>90){ 
 			for(var index in tager.scene.monsters){
 				var monsters = tager.scene.monsters[index];
@@ -274,7 +274,7 @@ var BattleScene = cc.Scene.extend({
 			
 			var skillLayer = tager.scene.skillLayer;
 						
-			//动画效果
+			// 动画效果
 			var kkGlode = new cc.Sprite(EffectUNLoad.wing); 
 			kkGlode.setPosition(skillLayer.centerPos.x,250 );
 			kkGlode.scale = 0.4;
@@ -285,10 +285,10 @@ var BattleScene = cc.Scene.extend({
 			kkGlode.runAction(seq);
 			skillLayer.addChild(kkGlode); 
 
-			//音效
+			// 音效
 			audioEngine.playEffect("res/sound/HP08.ogg");  
 			
-			//实际作用
+			// 实际作用
 			tager.player.HP+=100;
 			
 		}else if(allorone>70){
@@ -305,7 +305,7 @@ var BattleScene = cc.Scene.extend({
 			var seq = cc.sequence([step1,attarHurtFunc,step2,stepRm]); 
 			kkGlode.runAction(seq);
 			monsters.addChild(kkGlode);
-			//音效
+			// 音效
 			audioEngine.playEffect("res/sound/Attr01.ogg");  
 		}else{
 			for(var index in tager.scene.monsters){
@@ -314,18 +314,22 @@ var BattleScene = cc.Scene.extend({
 			var monsters = tager.scene.monsters[0];
 			var skillLayer = tager.scene.skillLayer;
 				
-			//动画效果
+			// 动画效果
 			var kkGlode = new cc.Sprite("res/eff/data.dat_000079.png"); 
-			kkGlode.setPosition(cc.p(monsters.width/2,monsters.height+150)); 
-			var step1 = cc.moveTo(0.2, cc.p(monsters.width/2,monsters.height/2)); 
+			kkGlode.setPosition(cc.p(monsters.width/2,monsters.height+450)); 
+			kkGlode.scale = 4;
+			var step2 = cc.scaleTo(0.5, 1);
+			var step1 = cc.moveTo(0.5, cc.p(monsters.width/2,monsters.height-40));  
+			var flyInAction = cc.spawn(step1,step2);
+
 			var attarHurtFunc = cc.callFunc(monsters.hurtFunc,monsters, 50);
 			var step2 =cc.delayTime(0.5);
 			var stepRm = cc.removeSelf(false);
-			var seq = cc.sequence([step1,attarHurtFunc,step2,stepRm]); 
+			var seq = cc.sequence([flyInAction,attarHurtFunc,step2,stepRm]); 
 			kkGlode.runAction(seq);
 			monsters.addChild(kkGlode); 
 
-			//音效
+			// 音效
 			audioEngine.playEffect("res/sound/HP08.ogg");  
 			
 		}
@@ -440,7 +444,7 @@ var SKCard = cc.Sprite.extend({
 	},
 	select: function() {
 		this.isSeleced=true;
-		this.borderSprite.setTexture(UIs1.HostileSelect);//HostileSelect
+		this.borderSprite.setTexture(UIs1.HostileSelect);// HostileSelect
 		this.borderSprite.runAction(this.borderAction());
 	},
 	normal: function() {
