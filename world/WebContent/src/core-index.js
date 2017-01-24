@@ -1,3 +1,13 @@
+var audioEngine = {
+	playMusic : function() {
+
+	},
+	playEffect : function() {
+	}
+};
+if (false) {
+	audioEngine = cc.audioEngine;
+}
 window.onload = function() {
 
 	cc.game.onStart = function() {

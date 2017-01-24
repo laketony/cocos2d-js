@@ -1,13 +1,14 @@
-var audioEngine=cc.audioEngine;
+
 // var audioEngine = {
 // playMusic:function() {},
 // playEffect:function() {}
 // };
 var BattleScene = cc.Scene.extend({
-	
+	gkMap:null,
 	monsters:[],
-	ctor: function() {
+	ctor: function(igkMap) {
 		this._super();
+		this.igkMap = gkMap;
 		this.createScene();
 		audioEngine.playMusic("res/sound/bgm/战斗00.mp3",true);
 	},
@@ -19,7 +20,7 @@ var BattleScene = cc.Scene.extend({
 		var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
 
 		// 底图
-		var bgSprite  = new cc.Sprite("res/UI1/map_04.png");
+		var bgSprite  = new cc.Sprite(gkMap.bguri);
 		bgSprite.setPosition(centerPos);
 		this.addChild(bgSprite);
 

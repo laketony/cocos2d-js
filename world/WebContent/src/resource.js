@@ -51,6 +51,7 @@ var EffectMap = {
 	playerAttackEffect: "res/UI/playerAttackEffect.png",
 	debuff: "res/eff/debuff@2x.png",
 	darkboom01: "res/eff/darkboom01@2x.png",
+	dark01: "res/eff/dark01@2x.png"	
 	
 };
 var EffectUNLoad = {
@@ -75,8 +76,9 @@ for (var i = 1; i <= 15; i++) {
 
 var actor = {
 	bookChara1_1 : "res/actor/bookChara1_1.png",
-	mChara1 : "res/actor/bookChara87_1.png",
-	mChara2 : "res/actor/bookChara88_1.png"
+	bookChara18_1 : "res/actor/bookChara18_1.png",
+	mChara1 : "res/monster/bookChara87_1.png",
+	mChara2 : "res/monster/bookChara88_1.png"
 }
 
 var UIs = {
@@ -105,8 +107,8 @@ var UIs1 = {
 		Hostile : "res/UI1/FX_Frame_Hostile_Frame@100.png",
 		Select_Hostile : "res/UI1/FX_Select_Hostile.png",
 		CaseSelect_FrameX100 :"res/UI1/FX_Frame_CaseSelect_Frame@100.png",
-		CaseSelect_Frame : "res/UI1/FX_Frame_CaseSelect_Frame.png"
-		
+		CaseSelect_Frame : "res/UI1/FX_Frame_CaseSelect_Frame.png",
+		FrendlyTalk_Frame:"res/UI1/FX_Frame_FrendlyTalk_Frame@100.png"
 	}
 
 var UIs3 = {

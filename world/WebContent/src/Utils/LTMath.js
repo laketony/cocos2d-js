@@ -124,3 +124,20 @@ function copyObj( obj ){
     // JSON解析之类的其实如果给定格式不对很容易出错滴，自己做好检验~
     return JSON.parse( JSON.stringify( obj ) );
 }
+function jiaoduAOX(point) {
+
+	var x = point.x;//邻边
+	var y = point.y;//对边
+	var c = rwLength(point);//斜边
+
+	var jiaodu = 0;
+	if (point.y > 0) {
+		jiaodu = Math.acos(x / c) * (180 / Math.PI);
+	} else {
+		jiaodu = 360 - Math.acos(x / c) * (180 / Math.PI);
+	}
+	//console.log("jiaodu"+jiaodu);
+	return jiaodu;
+
+}
+

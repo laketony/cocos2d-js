@@ -85,7 +85,7 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		// console.log(target);
 		// console.log(locationInNode);
 		// console.log(target.width + " " + target.height);
-		
+		console.log("~~~~~~~~~");
 		for(var index in target.playerLayer.children ){
 			var item = target.playerLayer.children[index];
 			var locationInNode = item.convertToNodeSpace(touch.getLocation());
@@ -114,6 +114,7 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		target.playerLayer.y += delta.y ;
 	},
 	onTouchEnded : function(touch, event) {
+		
 		if(this.isMoved == true)
 			return;
 		// 实现onTouchEnded事件处理回调函数
@@ -122,17 +123,28 @@ var ListenerWorldMapLayer = cc.EventListener.create({
 		// 获取当前触摸点相对于按钮所在的坐标
 		var locationInNode = target.convertToNodeSpace(touch.getLocation());
 		// console.log(locationInNode);
+		console.log("~~~222~~~~~~");
 		
 		for(var index in target.playerLayer.children ){
 			var item = target.playerLayer.children[index];
 			var locationInNode = item.convertToNodeSpace(touch.getLocation());
-			
+			console.log(item.getName());
 			var rect = cc.rect(0,0,item.width,item.height);
-			if(cc.rectContainsPoint(rect, locationInNode)){
+			if(cc.rectContainsPoint(rect, locationInNode)){ 
+				console.log("~~~23~~~~~~");
+				if(item.getName()){
+					var scene = new BattleScene2();
+					var trans = new cc.TransitionProgressInOut(1,scene);
+					cc.director.pushScene(scene); 
+				}else{
+					
+					gkMap={bguri:"res/bgmap/1/bg_bridge1.png"};
+					
+					var scene = new BattleScene(bguri);
+					var trans = new cc.TransitionProgressInOut(1,scene);
+					cc.director.pushScene(scene); 
+				}
 				
-				var scene = new BattleScene();
-				var trans = new cc.TransitionProgressInOut(1,scene);
-				cc.director.pushScene(scene); 
 			}
 		}
 	}

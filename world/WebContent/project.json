@@ -12,8 +12,9 @@
 		"src/layer/WindowLayer.js",
 		"src/items/actor.js",
 		"src/items/itemll.js",
+		"src/Utils/LTMath.js",
 		"src/Utils/EffectAnim.js",
-		"src/BattleScene.js",
+		"src/BattleScene.js","src/BattleScene2.js",
 		"src/layer/Battle_Layers.js"
 	]
 }
